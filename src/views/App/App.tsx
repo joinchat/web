@@ -3,8 +3,7 @@ import * as React from "react";
 // import { ColorsPallet } from "../../blocks/colorspallet/colorspallete";
 // import { ButtonsCollection } from "../../blocks/buttonscollection/buttonscollection";
 import styled from "styled-components";
-import { MuiThemeProvider } from "material-ui/styles";
-
+import ContentAdd from "material-ui/svg-icons/content/add";
 
 export class App extends React.Component {
 
