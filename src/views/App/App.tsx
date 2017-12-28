@@ -4,14 +4,18 @@ import * as React from "react";
 // import { ButtonsCollection } from "../../blocks/buttonscollection/buttonscollection";
 import styled from "styled-components";
 import ContentAdd from "material-ui/svg-icons/content/add";
+import Aside from "../../blocks/aside/aside";
+import Header from "../../blocks/header/header";
+import Main from "../../blocks/main/main";
 
 export class App extends React.Component {
 
     render() {
         return(
             <div>
-                <ContentAdd></ContentAdd>
-                Hello!
+                <Header/>
+                <Aside/>
+                <Main/>
             </div>
         );
     }

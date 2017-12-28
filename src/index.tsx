@@ -6,7 +6,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 // import "./assets/scss/styles.scss";
 
 
-import { App } from "./views/App/app";
+import { App } from "./views/app/app";
 
 
 ReactDOM.render(
