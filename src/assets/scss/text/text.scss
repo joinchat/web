@@ -1,0 +1,23 @@
+@import "../variables/variables";
+
+
+.header{
+  font-size: $header;
+}
+
+.title{
+  font-size: $title;
+  font-weight: bold;
+  line-height: 0.89;
+  text-align: left;
+  color: $black;
+}
+
+.subtitile{
+  color: $grey;
+  font-size: 16px;
+}
+
+.hint{
+  font-size: 10px;
+}

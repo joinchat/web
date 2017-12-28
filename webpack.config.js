@@ -38,18 +38,18 @@ module.exports = {
                     use: ['css-loader', 'sass-loader']
                 })
             },
-            {
-                test: /\.(eot|com|json|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-                use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: limits.url,
-                            mimetype: 'application/octet-stream',
-                        },
-                    },
-                ],
-            },
+            // {
+            //     test: /\.(eot|com|json|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+            //     use: [
+            //         {
+            //             loader: 'url-loader',
+            //             options: {
+            //                 limit: limits.url,
+            //                 mimetype: 'application/octet-stream',
+            //             },
+            //         },
+            //     ],
+            // },
               
         ]
     },
