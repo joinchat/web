@@ -13,7 +13,7 @@ const StyledMain = styled.div`
     display: block;
     width: 100%;
     height: 100vh;
-`
+`;
 
 export class ChannelBody extends React.Component<ChannelBodyProps> {
     constructor(props: ChannelBodyProps) {

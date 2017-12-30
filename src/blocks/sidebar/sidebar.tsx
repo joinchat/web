@@ -13,7 +13,7 @@ const StyledSidebar = styled.div`
     display: block;
     width: 100%;
     height: 100vh;
-`
+`;
 
 
 export class Sidebar extends React.Component<SidebarProps> {

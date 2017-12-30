@@ -12,7 +12,7 @@ const StyledHeader = styled.div`
     border: 1px solid #000;
     display: block;
     width: 100%;
-`
+`;
 
 export class Header extends React.Component<HeaderProps> {
     constructor(props: HeaderProps) {
