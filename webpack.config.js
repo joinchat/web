@@ -1,17 +1,20 @@
 const path = require('path');
-
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const limits = {
-    url: 8192,
-};
+// const limits = {
+//     url: 8192,
+// };
 
-module.exports = {
-    entry: "./src/index.tsx",
+webpackConfig = {
+    entry: {
+        bundle: "./src/index.tsx",
+        styles: "./src/assets/scss/styles.scss",
+    },
     output: {
         path: path.resolve(__dirname, '/dist'),
         publicPath: '/dist',
-        filename: 'bundle.js'
+        filename: '[name].js',
+        library: '[name]'
     },
 
     // Enable sourcemaps for debugging webpack's output.
@@ -19,21 +22,27 @@ module.exports = {
 
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: [".ts", ".tsx", ".js", ".json"]
+        extensions: [".ts", ".tsx", ".js", ".json", " "]
     },
 
     module: {
         rules: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-            { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+            { 
+                exclude: [/node_modules/],
+                test: /\.tsx?$/, 
+                loader: "awesome-typescript-loader"
+            },
 
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+            { enforce: "pre", 
+              test: /\.js$/, 
+              loader: "source-map-loader" 
+            },
 
-        
             {
                 test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
+                loader: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: ['css-loader', 'sass-loader']
                 })
@@ -66,3 +75,5 @@ module.exports = {
         new ExtractTextPlugin('style.css')
     ]
 };
+
+module.exports = webpackConfig;
