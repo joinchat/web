@@ -1,30 +1,33 @@
 import * as React from "react";
 import styled from "styled-components";
 
-interface HeaderProps {
+interface SidebarProps {
     channelsNumbers?: number;
 }
 
-const StyledHeader = styled.div`
+const StyledSidebar = styled.div`
     text-align: center;
     padding: 10px 20px;
     display: inline-block;
     border: 1px solid #000;
     display: block;
     width: 100%;
+    height: 100vh;
 `
 
-export class Header extends React.Component<HeaderProps> {
-    constructor(props: HeaderProps) {
+
+export class Sidebar extends React.Component<SidebarProps> {
+    constructor(props: SidebarProps) {
         super(props);
     }
 
     render() {
-
         return(
-            <StyledHeader>Sign In/Sign Up</StyledHeader>
+            <StyledSidebar>
+                <h1>Join.Chat</h1>
+            </StyledSidebar>
         );
     }
 }
 
-export default Header;
+export default Sidebar;

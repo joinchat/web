@@ -1,21 +1,23 @@
 import * as React from "react";
-// import { Button } from "../../components/button/button";
-// import { ColorsPallet } from "../../blocks/colorspallet/colorspallete";
-// import { ButtonsCollection } from "../../blocks/buttonscollection/buttonscollection";
+import Sidebar from "../../blocks/sidebar/sidebar";
 import styled from "styled-components";
 import ContentAdd from "material-ui/svg-icons/content/add";
-import Aside from "../../blocks/aside/aside";
+import ChannelBody from "../../blocks/channelBody/channelBody";
+import { Grid, Row, Col } from "react-bootstrap";
 import Header from "../../blocks/header/header";
-import Main from "../../blocks/main/main";
 
 export class App extends React.Component {
 
     render() {
         return(
             <div>
-                <Header/>
-                <Aside/>
-                <Main/>
+                <Row>
+                    <Col xs={12}><Header/></Col>
+                </Row>
+                <Row>
+                    <Col xs={3} lg={3} className="row-no-padding"><Sidebar/></Col>
+                    <Col xs={9} lg={9} className="row-no-padding"><ChannelBody/></Col>
+                </Row>
             </div>
         );
     }
