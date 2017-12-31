@@ -1,5 +1,6 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const WriteFilePlugin = require ('write-file-webpack-plugin');
 
 
 webpackConfig = {
@@ -8,10 +9,10 @@ webpackConfig = {
         styles: "./src/assets/scss/styles.scss",
     },
     output: {
-        path: path.resolve(__dirname, '/dist'),
+        path: path.resolve(__dirname, './dist'),
         publicPath: '/dist',
         filename: '[name].js',
-        library: '[name]'
+        library: '[name]',
     },
 
     // Enable sourcemaps for debugging webpack's output.
@@ -69,7 +70,8 @@ webpackConfig = {
     //     "react-dom": "ReactDOM"
     // },
     plugins: [
-        new ExtractTextPlugin('style.css')
+        new ExtractTextPlugin('style.css'),
+        new WriteFilePlugin()
     ]
 };
 
