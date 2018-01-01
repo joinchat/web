@@ -1,16 +1,15 @@
-'use strict';
-
 const path = require('path');
 const webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const paths = {
     npm: path.resolve(__dirname, './node_modules'),
     src: path.resolve(__dirname, './src'),
-    static: path.resolve(__dirname, './public'),
-    destination: path.resolve(__dirname, 'build/product'),
+    dist: path.resolve(__dirname, './dist'),
+    destination: path.resolve(__dirname, 'build'),
 };
 
 const limits = {
@@ -21,7 +20,7 @@ const config = {
     devtool: 'source-map',
     entry: {
         app: [
-            path.join(paths.src, 'index.jsx'),
+            path.join(paths.src, 'index.tsx'),
         ],
     },
     output: {
@@ -31,14 +30,9 @@ const config = {
     module: {
         rules: [
             {
-                test: /(\.jsx$|\.js$)/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['es2015'],
-                    },
-                },
+                exclude: [/node_modules/],
+                test: /\.tsx?$/, 
+                loader: "awesome-typescript-loader"
             },
             {
                 test: /\.css$/,
@@ -78,23 +72,24 @@ const config = {
                     },
                 ],
             },
-            {
-                test: /\.(eot|com|json|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-                use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: limits.url,
-                            mimetype: 'application/octet-stream',
-                        },
-                    },
-                ],
-            },
+            // {
+            //     test: /\.(eot|com|json|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+            //     use: [
+            //         {
+            //             loader: 'url-loader',
+            //             options: {
+            //                 limit: limits.url,
+            //                 mimetype: 'application/octet-stream',
+            //             },
+            //         },
+            //     ],
+            // },
         ],
     },
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.HotModuleReplacementPlugin(),
+        new CleanWebpackPlugin(['build']),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: '[name].js',
@@ -114,12 +109,12 @@ const config = {
         //     },
         // }),
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.ProvidePlugin({
-            '$': 'jquery',
-            'jQuery': 'jquery',
-            'window.jQuery': 'jquery',
-            'window.$': 'jquery',
-        }),
+        // new webpack.ProvidePlugin({
+        //     '$': 'jquery',
+        //     'jQuery': 'jquery',
+        //     'window.jQuery': 'jquery',
+        //     'window.$': 'jquery',
+        // }),
         new HtmlWebpackPlugin({
             hash: true,
             xhtml: true,
@@ -128,9 +123,10 @@ const config = {
                 removeComments: true,
                 collapseWhitespace: true,
                 removeTagWhitespace: true,
+                title: 'Join.Chat',
             },
-            favicon: path.join(paths.static, 'favicon.ico'),
-            template: path.join(paths.static, 'index.html'),
+            favicon: path.join(paths.dist, 'favicon.ico'),
+            template: path.join(paths.dist, 'index.html'),
         }),
         new ExtractTextPlugin({
             allChunks: true,
@@ -143,7 +139,7 @@ const config = {
             views: path.join(paths.src, 'views'),
             components: path.join(paths.src, 'components'),
         },
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx','.tsx', '.ts'],
     },
 };
 
