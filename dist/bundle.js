@@ -20078,9 +20078,9 @@ var React = __webpack_require__(0);
 var ReactDOM = __webpack_require__(13);
 var MuiThemeProvider_1 = __webpack_require__(185);
 __webpack_require__(105);
-var app_1 = __webpack_require__(271);
+var App_1 = __webpack_require__(271);
 ReactDOM.render(React.createElement(MuiThemeProvider_1.default, null,
-    React.createElement(app_1.App, null)), document.getElementById("root"));
+    React.createElement(App_1.default, null)), document.getElementById("root"));
 
 
 /***/ }),
