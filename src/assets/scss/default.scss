@@ -1,9 +1,14 @@
+html{
+  height: 100%; 
+}
+
 body {
   font-family: 'Roboto';
   font-size: 16px;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  height: 100%;
 }
 
 ul{
@@ -15,4 +20,10 @@ ul{
 .row-no-padding {
     padding-left: 0 !important;
     padding-right: 0 !important;
+}
+
+button{
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
 }

@@ -1,13 +1,16 @@
 import * as React from "react";
 import styled from "styled-components";
+import SentMessage from "../sentMessage/sentMessage";
+
 
 interface ChannelBodyProps {
     channelsNumbers?: number;
 }
 
 const StyledMain = styled.div`
+    position: relative;
     text-align: center;
-    padding: 10px 20px;
+    padding: 10px 0px;
     display: block;
     border: 1px solid #000;
     display: block;
@@ -22,9 +25,12 @@ export class ChannelBody extends React.Component<ChannelBodyProps> {
 
     render() {
         return(
-            <StyledMain>
-                Main
-            </StyledMain>
+            <div>
+                <StyledMain>
+                    <SentMessage></SentMessage>
+                </StyledMain>
+                
+            </div>
         );
     }
 }

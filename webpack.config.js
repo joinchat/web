@@ -65,7 +65,8 @@ webpackConfig = {
     
     plugins: [
         new ExtractTextPlugin('style.css'),
-        new WriteFilePlugin(),
+        // этот плагин нужен для создани файлов в dev-режиме
+        new WriteFilePlugin(), 
         new webpack.LoaderOptionsPlugin({
             options: {
                 contentBase: path.join(__dirname, "./dist"),
