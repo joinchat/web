@@ -1,6 +1,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WriteFilePlugin = require ('write-file-webpack-plugin');
+const webpack = require('webpack');
 
 
 webpackConfig = {
@@ -10,10 +11,11 @@ webpackConfig = {
     },
     output: {
         path: path.resolve(__dirname, './dist'),
-        publicPath: '/dist',
+        publicPath: './dist',
         filename: '[name].js',
         library: '[name]',
     },
+    
 
     // Enable sourcemaps for debugging webpack's output.
     devtool: "source-map",
@@ -63,7 +65,12 @@ webpackConfig = {
     
     plugins: [
         new ExtractTextPlugin('style.css'),
-        new WriteFilePlugin()
+        new WriteFilePlugin(),
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                contentBase: path.join(__dirname, "./dist"),
+            }
+        })
     ]
 };
 
