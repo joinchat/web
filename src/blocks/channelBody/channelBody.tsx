@@ -10,12 +10,11 @@ interface ChannelBodyProps {
 const StyledMain = styled.div`
     position: relative;
     text-align: center;
-    padding: 10px 0px;
-    display: block;
+    padding: 0px;
     border: 1px solid #000;
     display: block;
     width: 100%;
-    height: 100vh;
+    // height: 100vh;
 `;
 
 export class ChannelBody extends React.Component<ChannelBodyProps> {
@@ -28,8 +27,7 @@ export class ChannelBody extends React.Component<ChannelBodyProps> {
             <div>
                 <StyledMain>
                     <SentMessage></SentMessage>
-                </StyledMain>
-                
+                </StyledMain>         
             </div>
         );
     }

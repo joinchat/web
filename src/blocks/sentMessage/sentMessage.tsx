@@ -10,7 +10,8 @@ interface SentMessageProps {
 const StyledMessageBlock = styled.div`
     position: absolute;
     clear:both;
-    bottom: 0;
+    height: 50px;
+    // bottom: 0px;
     border: 1px solid grey;
     width: 100%;
     display: flex;
