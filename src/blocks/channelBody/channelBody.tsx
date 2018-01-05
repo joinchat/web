@@ -14,7 +14,7 @@ const StyledMain = styled.div`
     border: 1px solid #000;
     display: block;
     width: 100%;
-    // height: 100vh;
+    height: 100vh;
 `;
 
 export class ChannelBody extends React.Component<ChannelBodyProps> {

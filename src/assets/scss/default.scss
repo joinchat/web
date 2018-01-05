@@ -27,3 +27,13 @@ button{
   background-color: inherit;
   cursor: pointer;
 }
+
+#root{
+  height: 100%;
+  min-height: 100%;
+  overflow-y: hidden;
+}
+
+form,input{
+  width: 100%;
+}

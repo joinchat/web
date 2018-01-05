@@ -11,9 +11,15 @@ const StyledMessageBlock = styled.div`
     position: absolute;
     clear:both;
     height: 50px;
-    // bottom: 0px;
+    bottom: 42px;
     border: 1px solid grey;
     width: 100%;
+    display: flex;
+    padding: 10px 20px;
+    align-items: center;
+`;
+
+const StyledFormMessageBlock = styled.form`
     display: flex;
 `;
 
@@ -41,10 +47,10 @@ export class SentMessage extends React.Component<SentMessageProps> {
                 <div>
                     <TagFaces style={StylesForTagFaces}/>
                 </div>
-                <form>
+                <StyledFormMessageBlock>
                     <input type="text"/>
                     <button><Send style={StylesForSendIcon}></Send></button>
-                </form>
+                </StyledFormMessageBlock>
             </StyledMessageBlock>
         );
     }

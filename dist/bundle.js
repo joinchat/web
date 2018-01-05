@@ -44021,7 +44021,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
 var styled_components_1 = __webpack_require__(51);
-var StyledSidebar = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    text-align: center;\n    padding: 10px 20px;\n    border: 1px solid #000;\n    display: block;\n    width: 100%;\n    // height: 100vh;\n"], ["\n    text-align: center;\n    padding: 10px 20px;\n    border: 1px solid #000;\n    display: block;\n    width: 100%;\n    // height: 100vh;\n"])));
+var StyledSidebar = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    text-align: center;\n    padding: 10px 20px;\n    border: 1px solid #000;\n    display: block;\n    width: 100%;\n    height: 100vh;\n"], ["\n    text-align: center;\n    padding: 10px 20px;\n    border: 1px solid #000;\n    display: block;\n    width: 100%;\n    height: 100vh;\n"])));
 var Sidebar = (function (_super) {
     __extends(Sidebar, _super);
     function Sidebar(props) {
@@ -45826,7 +45826,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
 var styled_components_1 = __webpack_require__(51);
 var sentMessage_1 = __webpack_require__(283);
-var StyledMain = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    position: relative;\n    text-align: center;\n    padding: 0px;\n    border: 1px solid #000;\n    display: block;\n    width: 100%;\n    // height: 100vh;\n"], ["\n    position: relative;\n    text-align: center;\n    padding: 0px;\n    border: 1px solid #000;\n    display: block;\n    width: 100%;\n    // height: 100vh;\n"])));
+var StyledMain = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    position: relative;\n    text-align: center;\n    padding: 0px;\n    border: 1px solid #000;\n    display: block;\n    width: 100%;\n    height: 100vh;\n"], ["\n    position: relative;\n    text-align: center;\n    padding: 0px;\n    border: 1px solid #000;\n    display: block;\n    width: 100%;\n    height: 100vh;\n"])));
 var ChannelBody = (function (_super) {
     __extends(ChannelBody, _super);
     function ChannelBody(props) {
@@ -45869,7 +45869,8 @@ var React = __webpack_require__(0);
 var styled_components_1 = __webpack_require__(51);
 var send_1 = __webpack_require__(284);
 var tag_faces_1 = __webpack_require__(295);
-var StyledMessageBlock = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    position: absolute;\n    clear:both;\n    height: 50px;\n    // bottom: 0px;\n    border: 1px solid grey;\n    width: 100%;\n    display: flex;\n"], ["\n    position: absolute;\n    clear:both;\n    height: 50px;\n    // bottom: 0px;\n    border: 1px solid grey;\n    width: 100%;\n    display: flex;\n"])));
+var StyledMessageBlock = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    position: absolute;\n    clear:both;\n    height: 50px;\n    bottom: 42px;\n    border: 1px solid grey;\n    width: 100%;\n    display: flex;\n    padding: 10px 20px;\n    align-items: center;\n"], ["\n    position: absolute;\n    clear:both;\n    height: 50px;\n    bottom: 42px;\n    border: 1px solid grey;\n    width: 100%;\n    display: flex;\n    padding: 10px 20px;\n    align-items: center;\n"])));
+var StyledFormMessageBlock = styled_components_1.default.form(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n    display: flex;\n"], ["\n    display: flex;\n"])));
 var StylesForSendIcon = {
     width: 16,
     height: 16,
@@ -45889,7 +45890,7 @@ var SentMessage = (function (_super) {
         return (React.createElement(StyledMessageBlock, null,
             React.createElement("div", null,
                 React.createElement(tag_faces_1.default, { style: StylesForTagFaces })),
-            React.createElement("form", null,
+            React.createElement(StyledFormMessageBlock, null,
                 React.createElement("input", { type: "text" }),
                 React.createElement("button", null,
                     React.createElement(send_1.default, { style: StylesForSendIcon })))));
@@ -45898,7 +45899,7 @@ var SentMessage = (function (_super) {
 }(React.Component));
 exports.SentMessage = SentMessage;
 exports.default = SentMessage;
-var templateObject_1;
+var templateObject_1, templateObject_2;
 
 
 /***/ }),
