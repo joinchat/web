@@ -43917,12 +43917,16 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
 var styled_components_1 = __webpack_require__(106);
+var request_1 = __webpack_require__(386);
 var StyledSidebar = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    text-align: center;\n    padding: 10px 20px;\n    display: inline-block;\n    border: 1px solid #000;\n    display: block;\n    width: 100%;\n    height: 100vh;\n"], ["\n    text-align: center;\n    padding: 10px 20px;\n    display: inline-block;\n    border: 1px solid #000;\n    display: block;\n    width: 100%;\n    height: 100vh;\n"])));
 var Sidebar = (function (_super) {
     __extends(Sidebar, _super);
     function Sidebar(props) {
         return _super.call(this, props) || this;
     }
+    Sidebar.prototype.componentDidMount = function () {
+        request_1.testTryToGetCode("37258147073");
+    };
     Sidebar.prototype.render = function () {
         return (React.createElement(StyledSidebar, null,
             React.createElement("h1", null, "Join.Chat")));
@@ -56440,6 +56444,91 @@ var Header = (function (_super) {
 exports.Header = Header;
 exports.default = Header;
 var templateObject_1;
+
+
+/***/ }),
+/* 380 */,
+/* 381 */,
+/* 382 */,
+/* 383 */,
+/* 384 */,
+/* 385 */,
+/* 386 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var user_1 = __webpack_require__(387);
+exports.testTryToGetCode = function (phone) {
+    var config = {
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Accept-Language": "en",
+        },
+        method: "GET"
+    };
+    fetch(user_1.AUTORIZATION_GET_CODE_PATH + "?phone=" + phone, config)
+        .then(function (res) {
+        if (res.status !== 200) {
+            res.json().then(function (data) {
+                console.log(data);
+            });
+        }
+        else {
+            res.json().then(function (data) {
+                console.log(data);
+            });
+        }
+    })
+        .catch(function (err) {
+        console.log("Fetch Error: ", err);
+        return false;
+    });
+};
+exports.testTryToLogIn = function (phone, code) {
+    var config = {
+        headers: {
+            "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({
+            "phone": phone,
+            "code": code
+        }),
+    };
+    fetch(user_1.AUTORIZATION_VERIFICATION_PATH, config)
+        .then(function (res) {
+        if (res.status !== 200) {
+            res.json().then(function (data) {
+                console.log(data);
+            });
+        }
+        else {
+            res.json().then(function (data) {
+                console.log(data);
+            });
+        }
+    })
+        .catch(function (err) {
+        console.log("Fetch Error: ", err);
+        return false;
+    });
+};
+
+
+/***/ }),
+/* 387 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var TEST_URL = "http://api.demo.join.chat/v1";
+var PRODUCTION_URL = "https://api.internal.join.chat/v1";
+exports.AUTORIZATION_GET_CODE_PATH = TEST_URL + "/authorization/get-code";
+exports.AUTORIZATION_VERIFICATION_PATH = TEST_URL + "+/authorization/verification";
 
 
 /***/ })

@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import { testTryToGetCode } from "../../actions/request";
 
 interface SidebarProps {
     channelsNumbers?: number;
@@ -19,6 +20,11 @@ const StyledSidebar = styled.div`
 export class Sidebar extends React.Component<SidebarProps> {
     constructor(props: SidebarProps) {
         super(props);
+    }
+
+    componentDidMount(){
+        // testTryToLogIn("380638624707", "12345");
+        testTryToGetCode("37258147073");
     }
 
     render() {
