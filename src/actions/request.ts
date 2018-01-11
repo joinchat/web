@@ -260,7 +260,7 @@ export const testTryToGetCode = (phone: string) => {
         method: "GET"
     };
 
-    fetch(`${AUTORIZATION_GET_CODE_PATH}?phone=${phone}`, config)
+    fetch(`${AUTORIZATION_GET_CODE_PATH}`+ `${phone}`, config)
         .then(function(res) {
             if (res.status !== 200) {
                 res.json().then(function(data) {
@@ -306,6 +306,7 @@ export const testTryToLogIn = (phone: string, code: string) => {
                     // console.log(data);
                 });
             } else {
+                console.log(res.status)
                 res.json().then(function(data) {
                     console.log(data);
                     // return setUserToken(data['data']);
