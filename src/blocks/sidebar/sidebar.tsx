@@ -24,7 +24,7 @@ export class Sidebar extends React.Component<SidebarProps> {
 
     componentDidMount(){
         // testTryToLogIn("380638624707", "12345");
-        testTryToGetCode("380638624707");
+        testTryToGetCode("37258147073");
     }
 
     render() {

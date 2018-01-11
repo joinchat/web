@@ -260,14 +260,11 @@ export const testTryToGetCode = (phone: string) => {
         method: "GET"
     };
 
-    fetch(`${AUTORIZATION_GET_CODE_PATH}`+ `${phone}`, config)
+    fetch(`${AUTORIZATION_GET_CODE_PATH}` + `${phone}`, config)
         .then(function(res) {
             if (res.status !== 200) {
                 res.json().then(function(data) {
                     console.log(data);
-                    // console.log(accessToken);
-                    // console.log(refreshToken);
-                    // console.log(data);
                 });
             } else {
                 res.json().then(function(data) {
