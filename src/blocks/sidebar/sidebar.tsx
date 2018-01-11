@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { testTryToGetCode } from "../../actions/request";
+import { GetVerificationCode } from "../../actions/request";
 
 interface SidebarProps {
     channelsNumbers?: number;
@@ -24,7 +24,7 @@ export class Sidebar extends React.Component<SidebarProps> {
 
     componentDidMount(){
         // testTryToLogIn("380638624707", "12345");
-        testTryToGetCode("37258147073");
+        GetVerificationCode("37258147073");
     }
 
     render() {

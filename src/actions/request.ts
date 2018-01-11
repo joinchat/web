@@ -250,7 +250,7 @@ import { AUTORIZATION_GET_CODE_PATH, AUTORIZATION_VERIFICATION_PATH } from "../c
 
 
 
-export const testTryToGetCode = (phone: string) => {
+export const GetVerificationCode = (phone: string) => {
     let config = {
         headers: {
             "Accept": "application/json",
@@ -280,17 +280,18 @@ export const testTryToGetCode = (phone: string) => {
 };
 
 
-
-export const testTryToLogIn = (phone: string, code: string) => {
+export const PostVerificationCode = (phone: string, code: string) => {
     let config = {
         headers: {
+            "Accept": "application/json",
             "Content-Type": "application/json",
         },
         method: "POST",
-        body: JSON.stringify({
-            "phone": phone,
-            "code": code
-        }),
+        body: {
+            "phone": `${phone}`,
+            "code": `${code}`
+        }
+
     };
 
     fetch(AUTORIZATION_VERIFICATION_PATH, config)
@@ -298,20 +299,52 @@ export const testTryToLogIn = (phone: string, code: string) => {
             if (res.status !== 200) {
                 res.json().then(function(data) {
                     console.log(data);
-                    // console.log(accessToken);
-                    // console.log(refreshToken);
-                    // console.log(data);
                 });
             } else {
-                console.log(res.status)
                 res.json().then(function(data) {
                     console.log(data);
-                    // return setUserToken(data['data']);
-            });
-        }
-    })
-    .catch(function(err) {
-        console.log("Fetch Error: ", err);
-        return false;
-    });
-};
+                });
+            }
+        })
+        .catch(function(err) {
+            console.log("Fetch Error: ", err);
+            return false;
+        });
+}
+
+
+
+// export const testTryToLogIn = (phone: string, code: string) => {
+//     let config = {
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         method: "POST",
+//         body: JSON.stringify({
+//             "phone": phone,
+//             "code": code
+//         }),
+//     };
+//
+//     fetch(AUTORIZATION_VERIFICATION_PATH, config)
+//         .then(function(res) {
+//             if (res.status !== 200) {
+//                 res.json().then(function(data) {
+//                     console.log(data);
+//                     // console.log(accessToken);
+//                     // console.log(refreshToken);
+//                     // console.log(data);
+//                 });
+//             } else {
+//                 console.log(res.status)
+//                 res.json().then(function(data) {
+//                     console.log(data);
+//                     // return setUserToken(data['data']);
+//             });
+//         }
+//     })
+//     .catch(function(err) {
+//         console.log("Fetch Error: ", err);
+//         return false;
+//     });
+// };
