@@ -8,7 +8,6 @@ interface SidebarProps {
 const StyledSidebar = styled.div`
     text-align: center;
     padding: 10px 20px;
-    display: inline-block;
     border: 1px solid #000;
     display: block;
     width: 100%;
