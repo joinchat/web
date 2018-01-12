@@ -25,8 +25,12 @@ export class SignInDialog extends React.Component {
       />
     ];
 
+    const style = {
+        "display": "inline-block"
+    };
+
     return (
-      <div>
+      <div style={style}>
         <FlatButton label="Sign In" onClick={this.handleOpen} />
         <Dialog
           title="Sign In"

@@ -1,6 +1,5 @@
 import * as React from "react";
 import styled from "styled-components";
-import { GetVerificationCode, PostVerificationCode } from "../../actions/request";
 // import { ButtonComp } from "../../components/button/button";
 
 interface SidebarProps {
