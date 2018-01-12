@@ -1,10 +1,14 @@
 import * as React from "react";
 import styled from "styled-components";
 import FlatButton from "material-ui/FlatButton";
-import SignPopOver from "../../components/settingsPopOver";
+import SettingsPopOver from "../../components/settingsPopOver";
 
 interface HeaderProps {
     channelsNumbers?: number;
+}
+
+interface HeaderState {
+    isLoggedIn: boolean;
 }
 
 const StyledHeader = styled.div`
@@ -17,16 +21,27 @@ const StyledHeader = styled.div`
 `;
 
 
-export class Header extends React.Component<HeaderProps> {
+export class Header extends React.Component<HeaderProps, HeaderState> {
     constructor(props: HeaderProps) {
         super(props);
+
+        this.state = {
+            isLoggedIn: false,
+        };
     }
 
     render() {
+        const isLoggedIn = this.state.isLoggedIn;
+        let block = null;
 
+        if (!isLoggedIn) {
+            block = <div><FlatButton label="Sign In"></FlatButton>/<FlatButton label="Sign Up"></FlatButton></div>
+        } else {
+            block = <div><SettingsPopOver></SettingsPopOver></div>
+        }
         return(
             <StyledHeader>
-                <SignPopOver></SignPopOver>
+                {block}
             </StyledHeader>
         );
     }
