@@ -1,18 +1,21 @@
 import * as React from "react";
 import styled from "styled-components";
+import FlatButton from "material-ui/FlatButton";
+import SignPopOver from "../../components/settingsPopOver";
 
 interface HeaderProps {
     channelsNumbers?: number;
 }
 
 const StyledHeader = styled.div`
-    text-align: center;
+    text-align: right;
     padding: 10px 20px;
     display: inline-block;
     border: 1px solid #000;
     display: block;
     width: 100%;
 `;
+
 
 export class Header extends React.Component<HeaderProps> {
     constructor(props: HeaderProps) {
@@ -22,7 +25,9 @@ export class Header extends React.Component<HeaderProps> {
     render() {
 
         return(
-            <StyledHeader>Sign In/Sign Up</StyledHeader>
+            <StyledHeader>
+                <SignPopOver></SignPopOver>
+            </StyledHeader>
         );
     }
 }

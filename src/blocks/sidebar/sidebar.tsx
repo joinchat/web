@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { GetVerificationCode, PostVerificationCode } from "../../actions/request";
+// import { ButtonComp } from "../../components/button/button";
 
 interface SidebarProps {
     channelsNumbers?: number;
@@ -23,7 +24,7 @@ export class Sidebar extends React.Component<SidebarProps> {
     }
 
     componentDidMount() {
-        GetVerificationCode("380638624707");
+        // GetVerificationCode("380638624707");
         // PostVerificationCode("380638624707", "VjVoMP");
     }
 
@@ -31,6 +32,7 @@ export class Sidebar extends React.Component<SidebarProps> {
         return(
             <StyledSidebar>
                 <h1>Join.Chat</h1>
+                {/* <ButtonComp text="test"></ButtonComp> */}
             </StyledSidebar>
         );
     }
