@@ -5,6 +5,7 @@ import ContentAdd from "material-ui/svg-icons/content/add";
 import ChannelBody from "../../blocks/channelBody/channelBody";
 import { Grid, Row, Col } from "react-bootstrap";
 import Header from "../../blocks/header/header";
+import { connect } from "react-redux";
 
 export class App extends React.Component {
 
@@ -23,4 +24,10 @@ export class App extends React.Component {
     }
 }
 
-export default App;
+function mapStateToProps(state: any) {
+    return{
+        user: state.user
+    };
+}
+
+export default connect(mapStateToProps)(App);
