@@ -7,13 +7,15 @@ import { Grid, Row, Col } from "react-bootstrap";
 import Header from "../../blocks/header/header";
 import { connect } from "react-redux";
 
-export class App extends React.Component {
+export class App extends React.Component<any> {
 
     render() {
+        const {error, login, user_type, fetching, data, data_user } = this.props;
+
         return(
             <div>
                 <Row>
-                    <Col xs={12}><Header/></Col>
+                    <Col xs={12}><Header user_type={user_type}/></Col>
                 </Row>
                 <Row>
                     <Col xs={3} lg={3} className="row-no-padding"><Sidebar/></Col>
@@ -26,7 +28,12 @@ export class App extends React.Component {
 
 function mapStateToProps(state: any) {
     return{
-        user: state.user
+        error: state.error,
+        login: state.login,
+        user_type: state.user_type,
+        fetching: state.fetching,
+        data: state.data,
+        data_user: state.data_user,
     };
 }
 

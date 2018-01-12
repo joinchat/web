@@ -6,11 +6,7 @@ import SignInDialog from "../../components/signInDialog";
 import SignUpDialog from "../../components/signUpDialog";
 
 interface HeaderProps {
-    channelsNumbers?: number;
-}
-
-interface HeaderState {
-    isLoggedIn: boolean;
+    user_type: string;
 }
 
 const StyledHeader = styled.div`
@@ -23,22 +19,19 @@ const StyledHeader = styled.div`
 `;
 
 
-export class Header extends React.Component<HeaderProps, HeaderState> {
+export class Header extends React.Component<HeaderProps> {
     constructor(props: HeaderProps) {
         super(props);
 
-        this.state = {
-            isLoggedIn: false,
-        };
     }
 
     render() {
-        const isLoggedIn = this.state.isLoggedIn;
+        const user_type = this.props.user_type;
         let block = null;
-        if (!isLoggedIn) {
-            block = <div><SignInDialog/>/<SignUpDialog/></div>
+        if (user_type === "guest") {
+            block = <SettingsPopOver/>;
         } else {
-            block = <div><SettingsPopOver></SettingsPopOver></div>
+            block = <div><SignInDialog/>/<SignUpDialog/></div>;
         }
         return(
             <StyledHeader>
