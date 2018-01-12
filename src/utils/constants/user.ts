@@ -15,6 +15,7 @@ const PRODUCTION_URL = "https://api.internal.join.chat/v1";
 
 export const AUTORIZATION_GET_CODE_PATH = `${TEST_URL}/authorization/get-code?phone=`;
 export const AUTORIZATION_VERIFICATION_PATH = `${TEST_URL}/authorization/verification`;
+export const SIGNUP_PATH = `${TEST_URL}/authorization/sign-up/`;
 
 
 

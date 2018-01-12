@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { GetVerificationCode } from "../../actions/request";
+import { GetVerificationCode, PostVerificationCode } from "../../actions/request";
 
 interface SidebarProps {
     channelsNumbers?: number;
@@ -22,9 +22,9 @@ export class Sidebar extends React.Component<SidebarProps> {
         super(props);
     }
 
-    componentDidMount(){
-        // testTryToLogIn("380638624707", "12345");
-        GetVerificationCode("37258147073");
+    componentDidMount() {
+        GetVerificationCode("380638624707");
+        // PostVerificationCode("380638624707", "VjVoMP");
     }
 
     render() {

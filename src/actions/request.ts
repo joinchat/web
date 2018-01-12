@@ -1,4 +1,5 @@
-import { AUTORIZATION_GET_CODE_PATH, AUTORIZATION_VERIFICATION_PATH } from "../constants/user";
+import { AUTORIZATION_GET_CODE_PATH, AUTORIZATION_VERIFICATION_PATH, SIGNUP_PATH } from "../utils/constants/user";
+import { configForRequest } from "../utils/types/types";
 
 // const TIMEGAP = 30000;
 // let sessionEndTimer = null;
@@ -251,7 +252,7 @@ import { AUTORIZATION_GET_CODE_PATH, AUTORIZATION_VERIFICATION_PATH } from "../c
 
 
 export const GetVerificationCode = (phone: string) => {
-    let config = {
+    let config: configForRequest = {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
@@ -261,37 +262,25 @@ export const GetVerificationCode = (phone: string) => {
     };
 
     fetch(`${AUTORIZATION_GET_CODE_PATH}` + `${phone}`, config)
-        .then(function(res) {
-            if (res.status !== 200) {
-                res.json().then(function(data) {
-                    console.log(data);
-                });
-            } else {
-                res.json().then(function(data) {
-                    console.log(data);
-                    // return setUserToken(data['data']);
+            .then(function(res) {
+                console.log(res.status);
+            })
+            .catch(function(error) {
+                console.log(error);
             });
-        }
-    })
-    .catch(function(err) {
-        console.log("Fetch Error: ", err);
-        return false;
-    });
 };
 
-
 export const PostVerificationCode = (phone: string, code: string) => {
-    let config = {
+    let config: configForRequest = {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
         },
         method: "POST",
-        body: {
-            "phone": `${phone}`,
-            "code": `${code}`
-        }
-
+        body: JSON.stringify({
+            "phone": phone,
+            "code": code
+        }),
     };
 
     fetch(AUTORIZATION_VERIFICATION_PATH, config)
@@ -300,18 +289,46 @@ export const PostVerificationCode = (phone: string, code: string) => {
                 res.json().then(function(data) {
                     console.log(data);
                 });
-            } else {
-                res.json().then(function(data) {
-                    console.log(data);
-                });
             }
+            res.json().then(function(data) {
+                console.log(data);
+            });
         })
         .catch(function(err) {
             console.log("Fetch Error: ", err);
             return false;
         });
-}
+};
 
+export const RequestForSignUp = (guid: string, username: string, password: string) => {
+    let config: configForRequest = {
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({
+            "username": username,
+            "password": password
+        }),
+    };
+
+    fetch(`${SIGNUP_PATH}` + `${guid}`, config)
+        .then(function(res) {
+            if (res.status !== 200) {
+                res.json().then(function(data) {
+                    console.log(data);
+                });
+            }
+            res.json().then(function(data) {
+                console.log(data);
+            });
+        })
+        .catch(function(err) {
+            console.log("Fetch Error: ", err);
+            return false;
+        });
+};
 
 
 // export const testTryToLogIn = (phone: string, code: string) => {
