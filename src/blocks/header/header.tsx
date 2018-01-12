@@ -2,6 +2,8 @@ import * as React from "react";
 import styled from "styled-components";
 import FlatButton from "material-ui/FlatButton";
 import SettingsPopOver from "../../components/settingsPopOver";
+import SignInDialog from "../../components/signInDialog";
+import SignUpDialog from "../../components/signUpDialog";
 
 interface HeaderProps {
     channelsNumbers?: number;
@@ -33,9 +35,8 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
     render() {
         const isLoggedIn = this.state.isLoggedIn;
         let block = null;
-
         if (!isLoggedIn) {
-            block = <div><FlatButton label="Sign In"></FlatButton>/<FlatButton label="Sign Up"></FlatButton></div>
+            block = <div><SignInDialog/>/<SignUpDialog/></div>
         } else {
             block = <div><SettingsPopOver></SettingsPopOver></div>
         }
