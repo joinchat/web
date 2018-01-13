@@ -1,24 +1,34 @@
-import { AUTORIZATION_GET_CODE_PATH, CODE_RECIEVED_SUCCESS, CODE_RECIEVED_FAIL } from "../utils/constants/user";
+import { CODE_RECIEVED_SUCCESS, CODE_RECIEVED_FAIL, FETCH_REQUEST } from "../utils/constants/user";
 import { configForRequest } from "../utils/types/types";
+import { GetVerificationCode } from "./request";
 
-export const GetVerificationCode = (phone: string) => {
-    let config: configForRequest = {
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Accept-Language": "en",
-        },
-        method: "GET"
+export function fetchGetCode(phone: string) {
+    return (dispatch: any) => {
+        console.log("suuck");
+        return GetVerificationCode(phone).then((response: any) => {
+            if (response.status === 200 ) {
+                dispatch(fetchGetCodeSuccess());
+            } else {
+                dispatch(fetchGetCodeFail());
+            }
+        });
     };
+}
 
-    fetch(`${AUTORIZATION_GET_CODE_PATH}` + `${phone}`, config)
-            .then(function(res) {
-                if (res.status === 200) {
-                    return true;
-                }
-                return false;
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
-};
+function codeRequest() {
+    return {
+        type: FETCH_REQUEST,
+    };
+}
+
+function fetchGetCodeSuccess() {
+    return {
+        type: CODE_RECIEVED_SUCCESS
+    };
+}
+
+function fetchGetCodeFail() {
+    return {
+        type: CODE_RECIEVED_FAIL
+    };
+}

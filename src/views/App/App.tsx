@@ -7,6 +7,7 @@ import { Grid, Row, Col } from "react-bootstrap";
 import Header from "../../blocks/header/header";
 import { connect } from "react-redux";
 import * as pageActions from "../../actions/pageAction";
+import * as getCode from "../../actions/getCode";
 import { bindActionCreators } from "redux";
 
 export class App extends React.Component<any> {
@@ -14,11 +15,12 @@ export class App extends React.Component<any> {
     render() {
         const {error, login, user_type, fetching, data, data_user, succesGetCode } = this.props;
         const { setUser } = this.props.pageActions;
+        const { getCode } = this.props.getCode;
 
         return(
             <div>
                 <Row>
-                    <Col xs={12}><Header user_type={user_type} succesGetCode={succesGetCode} setUser={setUser}/></Col>
+                    <Col xs={12}><Header user_type={user_type} succesGetCode={succesGetCode} setUser={setUser} getCode={getCode}/></Col>
                 </Row>
                 <Row>
                     <Col xs={3} lg={3} className="row-no-padding"><Sidebar/></Col>
@@ -43,7 +45,8 @@ function mapStateToProps(state: any) {
 
 function mapDispatchProps(dispatch: any) {
     return{
-        pageActions: bindActionCreators(pageActions, dispatch)
+        pageActions: bindActionCreators(pageActions, dispatch),
+        getCode: bindActionCreators(getCode, dispatch)
     };
 }
 
