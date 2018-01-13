@@ -19,22 +19,18 @@ export default function userState(state: any = initialState, action: any) {
 
         case CODE_RECIEVED_SUCCESS:
             return {...state,
-                error: '',
+                error: "",
                 fetching: false,
-                user_type: 'User',
-                login: true,
-                data: action.payload,
-                data_user: '',
+                user_type: "guest",
+                succesGetCode: true,
             };
 
         case CODE_RECIEVED_FAIL:
             return {...state,
-                error: action.payload,
+                error: "",
                 fetching: false,
-                user_type: 'Guest',
-                login: false,
-                data: action.payload,
-                data_user: '',
+                user_type: "guest",
+                succesGetCode: false,
             };
 
         // case LOGING_OUT:

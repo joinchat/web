@@ -6,7 +6,7 @@
       "removeComments": true,
       "preserveConstEnums": true,
       "module": "commonjs",
-      "target": "es5",
+      "target": "es2015",
       "jsx": "react"
   },
   "include": [
