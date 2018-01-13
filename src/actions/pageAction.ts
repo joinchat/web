@@ -1,8 +1,16 @@
-import { SET_USER } from "../utils/constants/user";
+import { SET_USER, FETCH_REQUEST, FETCH_SUCCESS } from "../utils/constants/user";
 
 export function setUser(user_type: any) {
-    return{
-        type: SET_USER,
-        payload: user_type
-    };
+
+    return (dispatch: any) => {
+        dispatch({
+            type: FETCH_REQUEST
+        });
+
+        setTimeout(() => {
+            dispatch({
+                type: FETCH_SUCCESS
+            });
+        }, 3000);
+    }
 }

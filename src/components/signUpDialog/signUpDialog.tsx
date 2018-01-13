@@ -51,7 +51,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
       // GetVerificationCode(this.state.phone);
       // fetchGetCode(this.state.phone);
       // this.setState({typeOfInput: "code"}) : null;
-      // this.props.setUser("user");
+      this.props.setUser("user");
     } else if (this.state.typeOfInput === "code") {
       PostVerificationCode(this.state.phone, this.state.code);
       this.setState({code: "", typeOfInput: "userName"});

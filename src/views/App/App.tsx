@@ -17,6 +17,8 @@ export class App extends React.Component<any> {
         const { setUser } = this.props.pageActions;
         const { getCode } = this.props.getCode;
 
+        console.log(this.props);
+
         return(
             <div>
                 <Row>
