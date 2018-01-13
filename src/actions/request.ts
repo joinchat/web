@@ -14,7 +14,7 @@ export const GetVerificationCode = (phone: string) => {
 
     return new Promise((resolve, reject) => {
         fetch(`${AUTORIZATION_GET_CODE_PATH}` + `${phone}`, config)
-            .then( (response: any) => Promise.all(response) );
+            .then( (res: any) => Promise.all(res) );
     });
 
     
