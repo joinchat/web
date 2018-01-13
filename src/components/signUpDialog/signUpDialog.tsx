@@ -3,7 +3,8 @@ import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
-import { GetVerificationCode, PostVerificationCode } from "../../actions/request";
+import { PostVerificationCode } from "../../actions/request";
+import { GetVerificationCode } from "../../actions/getCode";
 
 interface SignUpDialogState {
   open: boolean;
@@ -16,7 +17,7 @@ interface SignUpDialogState {
 }
 
 interface SignUpDialogProps {
-  open?: boolean;
+  succesGetCode: boolean;
 }
 
 export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialogState> {
@@ -46,9 +47,10 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
   handlePost = () => {
     if (this.state.typeOfInput === "phone") {
       GetVerificationCode(this.state.phone);
-      this.setState({typeOfInput: "code"});
+      // this.setState({typeOfInput: "code"}) : null;
+      
     } else if (this.state.typeOfInput === "code") {
-      PostVerificationCode(this.state.phone,this.state.code);
+      PostVerificationCode(this.state.phone, this.state.code);
       this.setState({code: "", typeOfInput: "userName"});
     } else {
 

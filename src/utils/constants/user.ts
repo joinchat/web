@@ -1,13 +1,14 @@
-// export const FETCH_REQUEST = 'FETCH_REQUEST';
-// export const FETCH_SUCCESS = 'FETCH_SUCCESS';
-// export const FETCH_ERROR = 'FETCH_ERROR';
+export const FETCH_REQUEST = 'FETCH_REQUEST';
+export const FETCH_SUCCESS = 'FETCH_SUCCESS';
+export const FETCH_ERROR = 'FETCH_ERROR';
+
 // export const USER_ROLE_ERROR = 'USER_ROLE_ERROR';
 // export const USER_ROLE_SUCCESS = 'USER_ROLE_SUCCESS';
 
-// export const REQUEST_PATH = 'http://carsaleclub.xyz:5000/v1/auth/token';
-// export const REGISTER_PATH = 'http://carsaleclub.xyz:5000/v1/clients/client/register';
-// export const REFRESH_PATH = 'http://carsaleclub.xyz:5000/v1/auth/refresh_token';
-// export const USER_TYPE_PATH = 'http://carsaleclub.xyz:5000/v1/auth/actor';
+export const CODE_RECIEVED_SUCCESS = "CODE_RECIEVED_SUCCESS";
+export const CODE_RECIEVED_FAIL = "CODE_RECIEVED_FAIL";
+
+
 
 // authorization/get-code?phone=37258147073
 const TEST_URL = "http://api.demo.join.chat/v1";

@@ -7,6 +7,7 @@ import SignUpDialog from "../../components/signUpDialog";
 
 interface HeaderProps {
     user_type: string;
+    succesGetCode: boolean;
 }
 
 const StyledHeader = styled.div`
@@ -22,16 +23,15 @@ const StyledHeader = styled.div`
 export class Header extends React.Component<HeaderProps> {
     constructor(props: HeaderProps) {
         super(props);
-
     }
 
     render() {
-        const user_type = this.props.user_type;
+        const { user_type, succesGetCode } = this.props;
         let block = null;
         if (user_type === "guest") {
-            block = <SettingsPopOver/>;
+            block = <div><SignInDialog/>/<SignUpDialog succesGetCode={succesGetCode}/></div>;
         } else {
-            block = <div><SignInDialog/>/<SignUpDialog/></div>;
+            block = <SettingsPopOver/>;
         }
         return(
             <StyledHeader>
