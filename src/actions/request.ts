@@ -12,8 +12,11 @@ export const GetVerificationCode = (phone: string) => {
         method: "GET"
     };
 
-    return fetch(`${AUTORIZATION_GET_CODE_PATH}` + `${phone}`, config)
-        .then( res => Promise.all([res, res.json()]));
+    fetch(`${AUTORIZATION_GET_CODE_PATH}` + `${phone}`, config)
+        .then( res => Promise.all([res, res.json()]))
+        .catch(function(error) {
+                console.log(error);
+        });
     };
 
     

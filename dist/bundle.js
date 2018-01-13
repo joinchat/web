@@ -23166,8 +23166,11 @@ exports.GetVerificationCode = (phone) => {
         },
         method: "GET"
     };
-    return fetch(`${user_1.AUTORIZATION_GET_CODE_PATH}` + `${phone}`, config)
-        .then(res => Promise.all([res, res.json()]));
+    fetch(`${user_1.AUTORIZATION_GET_CODE_PATH}` + `${phone}`, config)
+        .then(res => Promise.all([res, res.json()]))
+        .catch(function (error) {
+        console.log(error);
+    });
 };
 exports.PostVerificationCode = (phone, code) => {
     let config = {
@@ -69845,17 +69848,27 @@ exports.setUser = setUser;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_1 = __webpack_require__(76);
-const request_1 = __webpack_require__(205);
 function fetchGetCode(phone) {
     return (dispatch) => {
         dispatch(codeRequest());
-        return request_1.GetVerificationCode(phone).then((res) => {
+        let config = {
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Accept-Language": "en",
+            },
+            method: "GET"
+        };
+        return fetch(`${user_1.AUTORIZATION_GET_CODE_PATH}` + `${phone}`, config)
+            .then((res) => {
             if (res.status === 200) {
                 dispatch(fetchGetCodeSuccess());
             }
             else {
                 dispatch(fetchGetCodeFail());
             }
+        }).catch(function (error) {
+            console.log(error);
         });
     };
 }
