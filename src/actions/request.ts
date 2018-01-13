@@ -12,10 +12,9 @@ export const GetVerificationCode = (phone: string) => {
         method: "GET"
     };
 
-    return new Promise((resolve, reject) => {
-        fetch(`${AUTORIZATION_GET_CODE_PATH}` + `${phone}`, config)
-            .then( (res: any) => Promise.all(res) );
-    });
+    return fetch(`${AUTORIZATION_GET_CODE_PATH}` + `${phone}`, config)
+        .then( res => Promise.all([res, res.json()]));
+    };
 
     
             // .then(function(res) {
@@ -28,7 +27,7 @@ export const GetVerificationCode = (phone: string) => {
             //     console.log(error);
             // });
         
-};
+// };
 
 export const PostVerificationCode = (phone: string, code: string) => {
     let config: configForRequest = {

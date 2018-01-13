@@ -23166,10 +23166,8 @@ exports.GetVerificationCode = (phone) => {
         },
         method: "GET"
     };
-    return new Promise((resolve, reject) => {
-        fetch(`${user_1.AUTORIZATION_GET_CODE_PATH}` + `${phone}`, config)
-            .then((res) => Promise.all(res));
-    });
+    return fetch(`${user_1.AUTORIZATION_GET_CODE_PATH}` + `${phone}`, config)
+        .then(res => Promise.all([res, res.json()]));
 };
 exports.PostVerificationCode = (phone, code) => {
     let config = {
@@ -67285,7 +67283,6 @@ class SignUpDialog extends React.Component {
         };
         this.handlePost = () => {
             if (this.state.typeOfInput === "phone") {
-                request_1.GetVerificationCode(this.state.phone);
             }
             else if (this.state.typeOfInput === "code") {
                 request_1.PostVerificationCode(this.state.phone, this.state.code);
@@ -69840,9 +69837,8 @@ const user_1 = __webpack_require__(76);
 const request_1 = __webpack_require__(205);
 function fetchGetCode(phone) {
     return (dispatch) => {
-        console.log("suuck");
-        return request_1.GetVerificationCode(phone).then((response) => {
-            if (response.status === 200) {
+        return request_1.GetVerificationCode(phone).then((res) => {
+            if (res.status === 200) {
                 dispatch(fetchGetCodeSuccess());
             }
             else {

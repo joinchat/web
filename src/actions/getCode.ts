@@ -4,9 +4,8 @@ import { GetVerificationCode } from "./request";
 
 export function fetchGetCode(phone: string) {
     return (dispatch: any) => {
-        console.log("suuck");
-        return GetVerificationCode(phone).then((response: any) => {
-            if (response.status === 200 ) {
+        return GetVerificationCode(phone).then((res: any) => {
+            if (res.status === 200 ) {
                 dispatch(fetchGetCodeSuccess());
             } else {
                 dispatch(fetchGetCodeFail());
