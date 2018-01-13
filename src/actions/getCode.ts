@@ -4,6 +4,7 @@ import { GetVerificationCode } from "./request";
 
 export function fetchGetCode(phone: string) {
     return (dispatch: any) => {
+        dispatch(codeRequest());
         return GetVerificationCode(phone).then((res: any) => {
             if (res.status === 200 ) {
                 dispatch(fetchGetCodeSuccess());

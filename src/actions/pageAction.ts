@@ -12,5 +12,5 @@ export function setUser(user_type: any) {
                 type: FETCH_SUCCESS
             });
         }, 3000);
-    }
+    };
 }

@@ -19,7 +19,7 @@ interface SignUpDialogState {
 interface SignUpDialogProps {
   succesGetCode: boolean;
   setUser: any;
-  getCode?: any;
+  fetchGetCode: any;
 }
 
 export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialogState> {
@@ -50,8 +50,9 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
     if (this.state.typeOfInput === "phone") {
       // GetVerificationCode(this.state.phone);
       // fetchGetCode(this.state.phone);
+      this.props.fetchGetCode(this.state.phone);
       // this.setState({typeOfInput: "code"}) : null;
-      this.props.setUser("user");
+      // this.props.setUser("user");
     } else if (this.state.typeOfInput === "code") {
       PostVerificationCode(this.state.phone, this.state.code);
       this.setState({code: "", typeOfInput: "userName"});
@@ -97,6 +98,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
   }
 
   render() {
+    console.log(this.props);
     let inputCollection = null;
 
     switch (this.state.typeOfInput) {

@@ -15,14 +15,14 @@ export class App extends React.Component<any> {
     render() {
         const {error, login, user_type, fetching, data, data_user, succesGetCode } = this.props;
         const { setUser } = this.props.pageActions;
-        const { getCode } = this.props.getCode;
+        const { fetchGetCode } = this.props.getCode;
 
         console.log(this.props);
 
         return(
             <div>
                 <Row>
-                    <Col xs={12}><Header user_type={user_type} succesGetCode={succesGetCode} setUser={setUser} getCode={getCode}/></Col>
+                    <Col xs={12}><Header user_type={user_type} succesGetCode={succesGetCode} setUser={setUser} fetchGetCode={fetchGetCode}/></Col>
                 </Row>
                 <Row>
                     <Col xs={3} lg={3} className="row-no-padding"><Sidebar/></Col>

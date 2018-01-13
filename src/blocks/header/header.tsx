@@ -9,7 +9,7 @@ interface HeaderProps {
     user_type: string;
     succesGetCode: boolean;
     setUser: any;
-    getCode: any;
+    fetchGetCode: any;
 }
 
 const StyledHeader = styled.div`
@@ -28,10 +28,13 @@ export class Header extends React.Component<HeaderProps> {
     }
 
     render() {
-        const { user_type, succesGetCode, setUser, getCode } = this.props;
+        const { user_type, succesGetCode, setUser, fetchGetCode } = this.props;
+        console.log(setUser);
+        console.log(fetchGetCode);
+        
         let block = null;
         if (user_type === "guest") {
-            block = <div><SignInDialog/>/<SignUpDialog succesGetCode={succesGetCode} setUser={setUser} getCode={getCode}/></div>;
+            block = <div><SignInDialog/>/<SignUpDialog succesGetCode={succesGetCode} setUser={setUser} fetchGetCode={fetchGetCode}/></div>;
         } else {
             block = <SettingsPopOver/>;
         }
