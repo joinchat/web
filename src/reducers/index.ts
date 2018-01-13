@@ -1,5 +1,5 @@
 import {
-    CODE_RECIEVED_SUCCESS, CODE_RECIEVED_FAIL, FETCH_REQUEST
+    CODE_RECIEVED_SUCCESS, CODE_RECIEVED_FAIL, FETCH_REQUEST, SET_USER
 } from "../utils/constants/user";
 
 const initialState = {
@@ -16,6 +16,9 @@ export default function userState(state: any = initialState, action: any) {
     switch (action.type) {
         case FETCH_REQUEST:
             return state;
+
+        case SET_USER:
+            return {...state, user_type: action.payload};
 
         case CODE_RECIEVED_SUCCESS:
             return {...state,

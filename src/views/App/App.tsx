@@ -6,16 +6,19 @@ import ChannelBody from "../../blocks/channelBody/channelBody";
 import { Grid, Row, Col } from "react-bootstrap";
 import Header from "../../blocks/header/header";
 import { connect } from "react-redux";
+import * as pageActions from "../../actions/pageAction";
+import { bindActionCreators } from "redux";
 
 export class App extends React.Component<any> {
 
     render() {
         const {error, login, user_type, fetching, data, data_user, succesGetCode } = this.props;
+        const { setUser } = this.props.pageActions;
 
         return(
             <div>
                 <Row>
-                    <Col xs={12}><Header user_type={user_type} succesGetCode={succesGetCode}/></Col>
+                    <Col xs={12}><Header user_type={user_type} succesGetCode={succesGetCode} setUser={setUser}/></Col>
                 </Row>
                 <Row>
                     <Col xs={3} lg={3} className="row-no-padding"><Sidebar/></Col>
@@ -38,4 +41,10 @@ function mapStateToProps(state: any) {
     };
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchProps(dispatch: any) {
+    return{
+        pageActions: bindActionCreators(pageActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchProps)(App);
