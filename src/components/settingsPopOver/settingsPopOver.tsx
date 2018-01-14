@@ -13,6 +13,7 @@ interface SignPopOverState {
 interface SignPopOverProps {
     open?: any;
     anchorEl?: any;
+    logOutUser: any;
 }
 
 export class SettingsPopOver extends React.Component<SignPopOverProps, SignPopOverState> {
@@ -41,6 +42,10 @@ export class SettingsPopOver extends React.Component<SignPopOverProps, SignPopOv
     });
   };
 
+  userLogOut = () => {
+    this.props.logOutUser();
+  }
+
   render() {
     return (
       <div>
@@ -60,7 +65,7 @@ export class SettingsPopOver extends React.Component<SignPopOverProps, SignPopOv
             <MenuItem primaryText="Refresh" />
             <MenuItem primaryText="About" />
             <MenuItem primaryText="Settings" />
-            <MenuItem primaryText="Sign out" />
+            <MenuItem primaryText="Sign out" onClick={this.userLogOut}/>
           </Menu>
         </Popover>
       </div>

@@ -13,6 +13,7 @@ interface HeaderProps {
     fetchvVerifyCode: any;
     fetchUserSignUp: any;
     fetchUserSignIn: any;
+    logOutUser: any;
     error: string;
 }
 
@@ -32,18 +33,18 @@ export class Header extends React.Component<HeaderProps> {
     }
 
     render() {
-        const { user_type, succesVerifyCode, fetchGetCode, type_of_input, fetchvVerifyCode, fetchUserSignUp, fetchUserSignIn, error } = this.props;
+        const { user_type, succesVerifyCode, fetchGetCode, type_of_input, fetchvVerifyCode, fetchUserSignUp, fetchUserSignIn, error, logOutUser } = this.props;
 
         let block = null;
         if (user_type === "guest") {
-            block = <div><SignInDialog fetchUserSignIn={fetchUserSignIn}/>/<SignUpDialog succesVerifyCode={succesVerifyCode} fetchGetCode={fetchGetCode} 
+            block = <div><SignInDialog fetchUserSignIn={fetchUserSignIn}/>/<SignUpDialog succesVerifyCode={succesVerifyCode} fetchGetCode={fetchGetCode}
             type_of_input={type_of_input} 
             fetchvVerifyCode={fetchvVerifyCode}
             fetchUserSignUp={fetchUserSignUp}
             error={error}
             /></div>;
         } else {
-            block = <SettingsPopOver/>;
+            block = <SettingsPopOver logOutUser={logOutUser}/>;
         }
         return(
             <StyledHeader>

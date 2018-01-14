@@ -47707,6 +47707,7 @@ const verifyCode = __webpack_require__(495);
 const signUpUser = __webpack_require__(496);
 const signInUser = __webpack_require__(497);
 const checkTypeOfUser = __webpack_require__(498);
+const logOutUser = __webpack_require__(509);
 const redux_1 = __webpack_require__(134);
 class App extends React.Component {
     componentDidMount() {
@@ -47719,10 +47720,11 @@ class App extends React.Component {
         const { fetchUserSignUp } = this.props.signUpUser;
         const { fetchUserSignIn } = this.props.signInUser;
         const { getTypeOfUser } = this.props.checkTypeOfUser;
+        const { logOutUser } = this.props.logOutUser;
         return (React.createElement("div", null,
             React.createElement(react_bootstrap_1.Row, null,
                 React.createElement(react_bootstrap_1.Col, { xs: 12 },
-                    React.createElement(header_1.default, { user_type: user_type, succesVerifyCode: succesVerifyCode, fetchGetCode: fetchGetCode, type_of_input: type_of_input, fetchvVerifyCode: fetchvVerifyCode, fetchUserSignUp: fetchUserSignUp, fetchUserSignIn: fetchUserSignIn, error: error }))),
+                    React.createElement(header_1.default, { user_type: user_type, succesVerifyCode: succesVerifyCode, fetchGetCode: fetchGetCode, type_of_input: type_of_input, fetchvVerifyCode: fetchvVerifyCode, fetchUserSignUp: fetchUserSignUp, fetchUserSignIn: fetchUserSignIn, logOutUser: logOutUser, error: error }))),
             React.createElement(react_bootstrap_1.Row, null,
                 React.createElement(react_bootstrap_1.Col, { xs: 3, lg: 3, className: "row-no-padding" },
                     React.createElement(sidebar_1.default, null)),
@@ -47750,7 +47752,8 @@ function mapDispatchProps(dispatch) {
         verifyCode: redux_1.bindActionCreators(verifyCode, dispatch),
         signUpUser: redux_1.bindActionCreators(signUpUser, dispatch),
         signInUser: redux_1.bindActionCreators(signInUser, dispatch),
-        checkTypeOfUser: redux_1.bindActionCreators(checkTypeOfUser, dispatch)
+        checkTypeOfUser: redux_1.bindActionCreators(checkTypeOfUser, dispatch),
+        logOutUser: redux_1.bindActionCreators(logOutUser, dispatch)
     };
 }
 exports.default = react_redux_1.connect(mapStateToProps, mapDispatchProps)(App);
@@ -60274,7 +60277,7 @@ class Header extends React.Component {
         super(props);
     }
     render() {
-        const { user_type, succesVerifyCode, fetchGetCode, type_of_input, fetchvVerifyCode, fetchUserSignUp, fetchUserSignIn, error } = this.props;
+        const { user_type, succesVerifyCode, fetchGetCode, type_of_input, fetchvVerifyCode, fetchUserSignUp, fetchUserSignIn, error, logOutUser } = this.props;
         let block = null;
         if (user_type === "guest") {
             block = React.createElement("div", null,
@@ -60283,7 +60286,7 @@ class Header extends React.Component {
                 React.createElement(signUpDialog_1.default, { succesVerifyCode: succesVerifyCode, fetchGetCode: fetchGetCode, type_of_input: type_of_input, fetchvVerifyCode: fetchvVerifyCode, fetchUserSignUp: fetchUserSignUp, error: error }));
         }
         else {
-            block = React.createElement(settingsPopOver_1.default, null);
+            block = React.createElement(settingsPopOver_1.default, { logOutUser: logOutUser });
         }
         return (React.createElement(StyledHeader, null, block));
     }
@@ -60330,6 +60333,9 @@ class SettingsPopOver extends React.Component {
                 open: false,
             });
         };
+        this.userLogOut = () => {
+            this.props.logOutUser();
+        };
         this.state = {
             open: false,
         };
@@ -60342,7 +60348,7 @@ class SettingsPopOver extends React.Component {
                     React.createElement(MenuItem_1.default, { primaryText: "Refresh" }),
                     React.createElement(MenuItem_1.default, { primaryText: "About" }),
                     React.createElement(MenuItem_1.default, { primaryText: "Settings" }),
-                    React.createElement(MenuItem_1.default, { primaryText: "Sign out" })))));
+                    React.createElement(MenuItem_1.default, { primaryText: "Sign out", onClick: this.userLogOut })))));
     }
 }
 exports.SettingsPopOver = SettingsPopOver;
@@ -70008,17 +70014,11 @@ function fetchUserSignIn(username, password) {
         return fetch(`${user_1.SIGNIN_PATH}`, config)
             .then((res) => {
             if (res.status === 200) {
-                res.json().then(function (data) {
-                    console.log(data);
-                });
-                dispatch(fetchSignUserInSuccess());
                 localStorage.setItem("user_type", "user");
+                dispatch(fetchSignUserInSuccess());
             }
             else {
-                res.json().then(function (data) {
-                    console.log(data);
-                    localStorage.setItem("user_type", "guest");
-                });
+                localStorage.setItem("user_type", "guest");
                 dispatch(fetchSignUserInFail());
             }
         }).catch(function (error) {
@@ -70174,6 +70174,35 @@ var thunk = createThunkMiddleware();
 thunk.withExtraArgument = createThunkMiddleware;
 
 exports['default'] = thunk;
+
+/***/ }),
+/* 503 */,
+/* 504 */,
+/* 505 */,
+/* 506 */,
+/* 507 */,
+/* 508 */,
+/* 509 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const user_1 = __webpack_require__(45);
+function logOutUser() {
+    return (dispatch) => {
+        localStorage.setItem("user_type", "user");
+        return dispatch(userTypeisGuest());
+    };
+}
+exports.logOutUser = logOutUser;
+;
+function userTypeisGuest() {
+    return {
+        type: user_1.USER_SIGN_UP_FAIL
+    };
+}
+
 
 /***/ })
 /******/ ]);

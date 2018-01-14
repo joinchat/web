@@ -6,12 +6,12 @@ import ChannelBody from "../../blocks/channelBody/channelBody";
 import { Grid, Row, Col } from "react-bootstrap";
 import Header from "../../blocks/header/header";
 import { connect } from "react-redux";
-import * as pageActions from "../../actions/pageAction";
 import * as getCode from "../../actions/getCode";
 import * as verifyCode from "../../actions/verifyCode";
 import * as signUpUser from "../../actions/signUpUser";
 import * as signInUser from "../../actions/signInUser";
 import * as checkTypeOfUser from "../../actions/checkTypeOfUser";
+import * as logOutUser from "../../actions/logOutUser";
 import { bindActionCreators } from "redux";
 
 export class App extends React.Component<any> {
@@ -26,6 +26,8 @@ export class App extends React.Component<any> {
         const { fetchUserSignUp } = this.props.signUpUser;
         const { fetchUserSignIn } = this.props.signInUser;
         const { getTypeOfUser } = this.props.checkTypeOfUser;
+        const { logOutUser } = this.props.logOutUser;
+
 
         return(
             <div>
@@ -38,6 +40,7 @@ export class App extends React.Component<any> {
                     fetchvVerifyCode={fetchvVerifyCode}
                     fetchUserSignUp={fetchUserSignUp}
                     fetchUserSignIn={fetchUserSignIn}
+                    logOutUser={logOutUser}
                     error={error}/></Col>
                 </Row>
                 <Row>
@@ -69,7 +72,8 @@ function mapDispatchProps(dispatch: any) {
         verifyCode: bindActionCreators(verifyCode, dispatch),
         signUpUser: bindActionCreators(signUpUser, dispatch),
         signInUser: bindActionCreators(signInUser, dispatch),
-        checkTypeOfUser: bindActionCreators(checkTypeOfUser, dispatch)
+        checkTypeOfUser: bindActionCreators(checkTypeOfUser, dispatch),
+        logOutUser: bindActionCreators(logOutUser, dispatch)
     };
 }
 
