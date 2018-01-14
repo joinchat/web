@@ -3,9 +3,7 @@ import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
-// import { PostVerificationCode } from "../../actions/request";
-// import { fetchGetCode } from "../../actions/getCode";
-// import { fetchvVerifyCode } from "../../actions/verifyCode";
+
 
 interface SignUpDialogState {
   open: boolean;
@@ -106,6 +104,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
             floatingLabelText="Enter your phone"
             value={this.state.phone}
             onChange={this.updatePhone.bind(this)}
+            type="number"
           />;
       break;
       case "code":

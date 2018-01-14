@@ -13,6 +13,8 @@ export const CODE_VERIFY_FAIL = "CODE_VERIFY_FAIL";
 export const USER_SIGN_UP_SUCCESS = "USER_SIGN_UP_SUCCESS";
 export const USER_SIGN_UP_FAIL = "USER_SIGN_UP_FAIL";
 
+export const USER_SIGN_IN_SUCCESS = "USER_SIGN_IN_SUCCESS";
+export const USER_SIGN_IN_FAIL = "USER_SIGN_IN_FAIL";
 
 
 // authorization/get-code?phone=37258147073
@@ -22,6 +24,7 @@ const PRODUCTION_URL = "https://api.internal.join.chat/v1";
 export const AUTORIZATION_GET_CODE_PATH = `${TEST_URL}/authorization/get-code?phone=`;
 export const AUTORIZATION_VERIFICATION_PATH = `${TEST_URL}/authorization/verification`;
 export const SIGNUP_PATH = `${TEST_URL}/authorization/sign-up/`;
+export const SIGNIN_PATH = `${TEST_URL}/authorization/sign-in`;
 
 
 
