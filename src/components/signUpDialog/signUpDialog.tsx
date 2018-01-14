@@ -20,6 +20,7 @@ interface SignUpDialogProps {
   type_of_input: string;
   fetchvVerifyCode: any;
   fetchUserSignUp: any;
+  error: string;
 }
 
 export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialogState> {

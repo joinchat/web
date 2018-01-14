@@ -16,7 +16,6 @@ import { bindActionCreators } from "redux";
 
 export class App extends React.Component<any> {
     componentDidMount() {
-        // localStorage.setItem("user_type", "guest");
         this.props.checkTypeOfUser.getTypeOfUser();
     }
 
@@ -31,7 +30,15 @@ export class App extends React.Component<any> {
         return(
             <div>
                 <Row>
-                    <Col xs={12}><Header user_type={user_type} succesVerifyCode={succesVerifyCode} fetchGetCode={fetchGetCode} type_of_input={type_of_input} fetchvVerifyCode={fetchvVerifyCode} fetchUserSignUp={fetchUserSignUp} fetchUserSignIn={fetchUserSignIn}/></Col>
+                    <Col xs={12}><Header
+                    user_type={user_type}
+                    succesVerifyCode={succesVerifyCode}
+                    fetchGetCode={fetchGetCode}
+                    type_of_input={type_of_input}
+                    fetchvVerifyCode={fetchvVerifyCode}
+                    fetchUserSignUp={fetchUserSignUp}
+                    fetchUserSignIn={fetchUserSignIn}
+                    error={error}/></Col>
                 </Row>
                 <Row>
                     <Col xs={3} lg={3} className="row-no-padding"><Sidebar/></Col>
