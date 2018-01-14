@@ -1,46 +1,57 @@
-// import { LOGING_OUT, LOGING_IN_TRUE, USER_ROLE_SUCCESS, USER_ROLE_ERROR } from '../constants/user';
-// import { toExistAccessToken, getUserRole, refreshToken } from './request';
+import { USER_SIGN_UP_SUCCESS, USER_SIGN_UP_FAIL, FETCH_REQUEST, SIGNUP_PATH} from "../utils/constants/user";
+import { configForRequest } from "../utils/types/types";
 
-// export function checkUserStateInFirstInDidMount() {
-//     return (dispatch) => {
-//         if (toExistAccessToken()) {
-//             dispatch(userLoginIn());
-//             getUserRole(toExistAccessToken()).then(([response, json]) => {
-//                 if (response.status == 200 && json['success']) {
-//                     dispatch(getUserRoleSuccess(json['data']));
-//                     refreshToken();
-//                 } else {
-//                     dispatch(getUserRoleError(json['data']));
-//                 }
-//             });
-//         } else {
-//             dispatch(loginOut());
-//         }
-//     };
-// };
+export function fetchUserSignUp(username: string, password: string) {
+    return (dispatch: any) => {
+        dispatch(signUpRequest());
+        let config: configForRequest = {
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify({
+                "username": username,
+                "password": password
+            }),
+        };
 
-// function userLoginIn() {
-//     return {
-//         type: LOGING_IN_TRUE,
-//     };
-// }
+        let guid = localStorage.getItem("guid");
 
-// function loginOut() {
-//     return {
-//         type: LOGING_OUT,
-//     };
-// }
+        return fetch(`${SIGNUP_PATH}` + `${guid}`, config)
+            .then((res: any) => {
+                if (res.status === 200 ) {
+                    res.json().then(function(data: any) {
+                        console.log(data);
+                    });
+                dispatch(fetchSignUserUpSuccess());
+                } else {
+                    res.json().then(function(data: any) {
+                        console.log(data);
+                    });
+                    dispatch(fetchSignUserUpFail());
+                }
+            }).catch(function(error) {
+                console.log(error);
+                dispatch(fetchSignUserUpFail());
+            });
+        };
+}
 
-// function getUserRoleSuccess(data) {
-//     return {
-//         type: USER_ROLE_SUCCESS,
-//         payload: data,
-//     };
-// }
+function signUpRequest() {
+    return {
+        type: FETCH_REQUEST,
+    };
+}
 
-// function getUserRoleError(data) {
-//     return {
-//         type: USER_ROLE_ERROR,
-//         payload: data,
-//     };
-// }
+function fetchSignUserUpSuccess() {
+    return {
+        type: USER_SIGN_UP_SUCCESS
+    };
+}
+
+function fetchSignUserUpFail() {
+    return {
+        type: USER_SIGN_UP_FAIL
+    };
+}

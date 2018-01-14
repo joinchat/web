@@ -1,5 +1,5 @@
 import {
-    CODE_RECIEVED_SUCCESS, CODE_RECIEVED_FAIL, FETCH_REQUEST, SET_USER, CODE_VERIFY_SUCCESS, CODE_VERIFY_FAIL
+    CODE_RECIEVED_SUCCESS, CODE_RECIEVED_FAIL, FETCH_REQUEST, SET_USER, CODE_VERIFY_SUCCESS, CODE_VERIFY_FAIL, USER_SIGN_UP_SUCCESS, USER_SIGN_UP_FAIL
 } from "../utils/constants/user";
 
 const initialState = {
@@ -50,6 +50,19 @@ export default function userState(state: any = initialState, action: any) {
                 error: "",
                 succesVerifyCode: false,
             };
+
+        case USER_SIGN_UP_SUCCESS:
+            return {...state,
+                login: true,
+                user_type: "user",
+        };
+
+        case USER_SIGN_UP_FAIL:
+            return {...state,
+                login: false,
+                user_type: "guest",
+        };
+        
         // case LOGING_OUT:
         //     return Object.assign( {}, state, {
         //         error: '',

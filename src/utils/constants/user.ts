@@ -1,15 +1,17 @@
 export const FETCH_REQUEST = "FETCH_REQUEST";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_ERROR = "FETCH_ERROR";
-export const SET_USER  = "SET_USER";
 
-// export const USER_ROLE_ERROR = 'USER_ROLE_ERROR';
-// export const USER_ROLE_SUCCESS = 'USER_ROLE_SUCCESS';
+export const SET_USER  = "SET_USER";
 
 export const CODE_RECIEVED_SUCCESS = "CODE_RECIEVED_SUCCESS";
 export const CODE_RECIEVED_FAIL = "CODE_RECIEVED_FAIL";
+
 export const CODE_VERIFY_SUCCESS = "CODE_VERIFY_SUCCESS";
 export const CODE_VERIFY_FAIL = "CODE_VERIFY_FAIL";
+
+export const USER_SIGN_UP_SUCCESS = "USER_SIGN_UP_SUCCESS";
+export const USER_SIGN_UP_FAIL = "USER_SIGN_UP_FAIL";
 
 
 

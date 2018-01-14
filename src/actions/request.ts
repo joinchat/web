@@ -1,65 +1,7 @@
 import { AUTORIZATION_GET_CODE_PATH, AUTORIZATION_VERIFICATION_PATH, SIGNUP_PATH } from "../utils/constants/user";
 import { configForRequest } from "../utils/types/types";
 
-export const PostVerificationCode = (phone: string, code: string) => {
-    let config: configForRequest = {
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify({
-            "phone": phone,
-            "code": code
-        }),
-    };
 
-    fetch(AUTORIZATION_VERIFICATION_PATH, config)
-        .then(function(res) {
-            if (res.status !== 200) {
-                res.json().then(function(data) {
-                    console.log(data);
-                });
-            }
-            res.json().then(function(data) {
-                console.log(data);
-            });
-        })
-        .catch(function(err) {
-            console.log("Fetch Error: ", err);
-            return false;
-        });
-};
-
-export const RequestForSignUp = (guid: string, username: string, password: string) => {
-    let config: configForRequest = {
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify({
-            "username": username,
-            "password": password
-        }),
-    };
-
-    fetch(`${SIGNUP_PATH}` + `${guid}`, config)
-        .then(function(res) {
-            if (res.status !== 200) {
-                res.json().then(function(data) {
-                    console.log(data);
-                });
-            }
-            res.json().then(function(data) {
-                console.log(data);
-            });
-        })
-        .catch(function(err) {
-            console.log("Fetch Error: ", err);
-            return false;
-        });
-};
 
 // const TIMEGAP = 30000;
 // let sessionEndTimer = null;

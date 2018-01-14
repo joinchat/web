@@ -21,6 +21,7 @@ interface SignUpDialogProps {
   fetchGetCode: any;
   type_of_input: string;
   fetchvVerifyCode: any;
+  fetchUserSignUp: any;
 }
 
 export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialogState> {
@@ -52,6 +53,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
     } else if (this.props.type_of_input === "code") {
       this.props.fetchvVerifyCode(this.state.phone, this.state.code);
     } else {
+      this.props.fetchUserSignUp(this.state.username, this.state.password)
       this.setState({username: "", password: ""});
     }
   }
