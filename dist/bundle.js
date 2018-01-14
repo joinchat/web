@@ -68489,7 +68489,7 @@ class SignUpDialog extends React.Component {
         };
         this.handlePost = () => {
             if (this.props.type_of_input === "phone") {
-                this.props.fetchGetCode(this.state.phone);
+                this.validatePhone() ? this.props.fetchGetCode(this.state.phone) : console.log("error");
             }
             else if (this.props.type_of_input === "code") {
                 this.props.fetchvVerifyCode(this.state.phone, this.state.code);
@@ -68499,36 +68499,26 @@ class SignUpDialog extends React.Component {
                 this.setState({ username: "", password: "" });
             }
         };
-        this.updatePhone = (event) => {
-            const value = event.target.value;
-            console.log(event.target.name);
-            this.setState({
-                phone: value,
-            });
+        this.updateState = (event) => {
+            const { name, value } = event.target;
+            this.setState(() => ({
+                [name]: value
+            }));
         };
-        this.updateCode = (event) => {
-            const value = event.target.value;
+        this.validatePhone = () => {
+            let errorState = Object.assign({}, this.state.errorState);
+            if (this.state.phone.length < 4 || this.state.phone.length > 15) {
+                errorState.phone = "Please input correct value";
+                this.setState({
+                    errorState
+                });
+                return false;
+            }
+            errorState.phone = "";
             this.setState({
-                code: value,
+                errorState
             });
-        };
-        this.updateName = (event) => {
-            const value = event.target.value;
-            this.setState({
-                username: value,
-            });
-        };
-        this.updatePassword = (event) => {
-            const value = event.target.value;
-            this.setState({
-                password: value,
-            });
-        };
-        this.updateRepeatPassword = (event) => {
-            const value = event.target.value;
-            this.setState({
-                repeatPassword: value,
-            });
+            return true;
         };
         this.state = {
             open: false,
@@ -68542,7 +68532,7 @@ class SignUpDialog extends React.Component {
                 code: "",
                 password: "",
                 repeatPassword: "",
-                username: "",
+                username: ""
             }
         };
     }
@@ -68553,18 +68543,18 @@ class SignUpDialog extends React.Component {
         switch (type_of_input) {
             case "phone":
                 inputCollection =
-                    React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Enter your phone", value: phone, onChange: this.updatePhone.bind(this), type: "number", name: "phone", errorText: error || errorState.phone });
+                    React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Enter your phone", value: phone, onChange: this.updateState.bind(this), type: "number", name: "phone", errorText: error || errorState.phone });
                 break;
             case "code":
                 inputCollection =
-                    React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Enter code from message", value: code, onChange: this.updateCode.bind(this), errorText: error || errorState.code, name: "code" });
+                    React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Enter code from message", value: code, onChange: this.updateState.bind(this), errorText: error || errorState.code, name: "code" });
                 break;
             case "userName":
                 inputCollection =
                     React.createElement("div", null,
-                        React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Username", value: username, onChange: this.updateName.bind(this), errorText: error || errorState.username }),
-                        React.createElement(TextField_1.default, { fullWidth: true, type: "password", hintText: "Password Field", floatingLabelText: "password", value: password, onChange: this.updatePassword.bind(this), errorText: error || errorState.password }),
-                        React.createElement(TextField_1.default, { fullWidth: true, type: "password", hintText: "Password Field", floatingLabelText: "Please repeat password", value: repeatPassword, onChange: this.updateRepeatPassword.bind(this), errorText: error || errorState.repeatPassword }));
+                        React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Username", value: username, onChange: this.updateState.bind(this), errorText: error || errorState.username }),
+                        React.createElement(TextField_1.default, { fullWidth: true, type: "password", hintText: "Password Field", floatingLabelText: "password", value: password, onChange: this.updateState.bind(this), errorText: error || errorState.password }),
+                        React.createElement(TextField_1.default, { fullWidth: true, type: "password", hintText: "Password Field", floatingLabelText: "Please repeat password", value: repeatPassword, onChange: this.updateState.bind(this), errorText: error || errorState.repeatPassword }));
                 break;
         }
         const actions = [
