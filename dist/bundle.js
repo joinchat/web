@@ -68499,10 +68499,6 @@ class SignUpDialog extends React.Component {
                 this.setState({ username: "", password: "" });
             }
         };
-        this.updateState = (event) => {
-            const value = event.target.value;
-            const name = event.target.name;
-        };
         this.updatePhone = (event) => {
             const value = event.target.value;
             console.log(event.target.name);
@@ -68541,26 +68537,34 @@ class SignUpDialog extends React.Component {
             username: "",
             password: "",
             repeatPassword: "",
-            error: ""
+            errorState: {
+                phone: "",
+                code: "",
+                password: "",
+                repeatPassword: "",
+                username: "",
+            }
         };
     }
     render() {
         let inputCollection = null;
-        switch (this.props.type_of_input) {
+        let { type_of_input, error } = this.props;
+        let { phone, errorState, code, username, password, repeatPassword } = this.state;
+        switch (type_of_input) {
             case "phone":
                 inputCollection =
-                    React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Enter your phone", value: this.state.phone, onChange: this.updatePhone.bind(this), type: "number", errorText: this.props.error || this.state.error, name: "phone" });
+                    React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Enter your phone", value: phone, onChange: this.updatePhone.bind(this), type: "number", name: "phone", errorText: error || errorState.phone });
                 break;
             case "code":
                 inputCollection =
-                    React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Enter code from message", value: this.state.code, onChange: this.updateCode.bind(this), errorText: this.props.error || this.state.error, name: "code" });
+                    React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Enter code from message", value: code, onChange: this.updateCode.bind(this), errorText: error || errorState.code, name: "code" });
                 break;
             case "userName":
                 inputCollection =
                     React.createElement("div", null,
-                        React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Username", value: this.state.username, onChange: this.updateName.bind(this), errorText: this.props.error || this.state.error }),
-                        React.createElement(TextField_1.default, { fullWidth: true, type: "password", hintText: "Password Field", floatingLabelText: "password", value: this.state.password, onChange: this.updatePassword.bind(this) }),
-                        React.createElement(TextField_1.default, { fullWidth: true, type: "password", hintText: "Password Field", floatingLabelText: "Please repeat password", value: this.state.repeatPassword, onChange: this.updateRepeatPassword.bind(this) }));
+                        React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Username", value: username, onChange: this.updateName.bind(this), errorText: error || errorState.username }),
+                        React.createElement(TextField_1.default, { fullWidth: true, type: "password", hintText: "Password Field", floatingLabelText: "password", value: password, onChange: this.updatePassword.bind(this), errorText: error || errorState.password }),
+                        React.createElement(TextField_1.default, { fullWidth: true, type: "password", hintText: "Password Field", floatingLabelText: "Please repeat password", value: repeatPassword, onChange: this.updateRepeatPassword.bind(this), errorText: error || errorState.repeatPassword }));
                 break;
         }
         const actions = [

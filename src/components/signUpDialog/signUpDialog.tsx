@@ -12,7 +12,13 @@ interface SignUpDialogState {
   username: string;
   password: string;
   repeatPassword: string;
-  error: string;
+  errorState: {
+    phone: string;
+    code: string;
+    password: string;
+    repeatPassword: string;
+    username: string;
+  };
 }
 
 interface SignUpDialogProps {
@@ -35,7 +41,13 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
       username: "",
       password: "",
       repeatPassword: "",
-      error: ""
+      errorState: {
+        phone: "",
+        code: "",
+        password: "",
+        repeatPassword:  "",
+        username:  "",
+      }
     };
 
   }
@@ -59,17 +71,17 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
     }
   }
 
-  updateState = (event: any) => {
-    const value = event.target.value;
-    const name = event.target.name;
+  // updateState = (event: any) => {
+  //   const value = event.target.value;
+  //   const name = event.target.name;
 
-    this.setState((name, value) => {
-       name: value
-    });
-    // this.setState(function(name, value){
-    //   return `${name}`: value
-    // });
-  }
+  //   this.setState(name, value) => {
+  //      name: value
+  //   });
+  //   // this.setState(function(name, value){
+  //   //   return `${name}`: value
+  //   // });
+  // }
 
   updatePhone = (event: any) => {
     const value = event.target.value;
@@ -110,20 +122,21 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
   render() {
     let inputCollection = null;
 
-    // console.log(this.props);
+    let { type_of_input, error } = this.props;
+    let { phone, errorState, code, username, password, repeatPassword } = this.state;
 
-    switch (this.props.type_of_input) {
+    switch (type_of_input) {
       case "phone":
         inputCollection =
           <TextField
             fullWidth={true}
             floatingLabelText="Enter your phone"
-            value={this.state.phone}
-            // onChange={this.updatePhone.bind(this)}
-            onChange={this.updateState.bind(this)}
+            value={phone}
+            onChange={this.updatePhone.bind(this)}
+            // onChange={this.updateState.bind(this)}
             type="number"
-            errorText={this.props.error || this.state.error}
             name="phone"
+            errorText={error || errorState.phone}
           />;
       break;
       case "code":
@@ -131,9 +144,9 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
           <TextField
             fullWidth={true}
             floatingLabelText="Enter code from message"
-            value={this.state.code}
+            value={code}
             onChange={this.updateCode.bind(this)}
-            errorText={this.props.error || this.state.error}
+            errorText={error || errorState.code}
             name="code"
           />;
       break;
@@ -143,25 +156,27 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
             <TextField
               fullWidth={true}
               floatingLabelText="Username"
-              value={this.state.username}
+              value={username}
               onChange={this.updateName.bind(this)}
-              errorText={this.props.error || this.state.error}
+              errorText={error || errorState.username}
             />
             <TextField
               fullWidth={true}
               type="password"
               hintText="Password Field"
               floatingLabelText="password"
-              value={this.state.password}
+              value={password}
               onChange={this.updatePassword.bind(this)}
+              errorText={error || errorState.password}
             />
             <TextField
               fullWidth={true}
               type="password"
               hintText="Password Field"
               floatingLabelText="Please repeat password"
-              value={this.state.repeatPassword}
+              value={repeatPassword}
               onChange={this.updateRepeatPassword.bind(this)}
+              errorText={error || errorState.repeatPassword}
             /></div>;
       break;
     }
