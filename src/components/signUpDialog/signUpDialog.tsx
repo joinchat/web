@@ -3,8 +3,9 @@ import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
-import { PostVerificationCode } from "../../actions/request";
-import { fetchGetCode } from "../../actions/getCode";
+// import { PostVerificationCode } from "../../actions/request";
+// import { fetchGetCode } from "../../actions/getCode";
+// import { fetchvVerifyCode } from "../../actions/verifyCode";
 
 interface SignUpDialogState {
   open: boolean;
@@ -16,10 +17,10 @@ interface SignUpDialogState {
 }
 
 interface SignUpDialogProps {
-  succesGetCode: boolean;
-  setUser: any;
+  succesVerifyCode: boolean;
   fetchGetCode: any;
   type_of_input: string;
+  fetchvVerifyCode: any;
 }
 
 export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialogState> {
@@ -47,14 +48,9 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
 
   handlePost = () => {
     if (this.props.type_of_input === "phone") {
-      // GetVerificationCode(this.state.phone);
-      // fetchGetCode(this.state.phone);
       this.props.fetchGetCode(this.state.phone);
-      // this.setState({typeOfInput: "code"}) : null;
-      // this.props.setUser("user");
     } else if (this.props.type_of_input === "code") {
-      PostVerificationCode(this.state.phone, this.state.code);
-      this.setState({code: ""});
+      this.props.fetchvVerifyCode(this.state.phone, this.state.code);
     } else {
       this.setState({username: "", password: ""});
     }
@@ -98,7 +94,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
   render() {
     let inputCollection = null;
 
-    console.log(this.props.type_of_input);
+    console.log(this.props);
 
     switch (this.props.type_of_input) {
       case "phone":

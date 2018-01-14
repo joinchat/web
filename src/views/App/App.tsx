@@ -8,20 +8,21 @@ import Header from "../../blocks/header/header";
 import { connect } from "react-redux";
 import * as pageActions from "../../actions/pageAction";
 import * as getCode from "../../actions/getCode";
+import * as verifyCode from "../../actions/verifyCode";
 import { bindActionCreators } from "redux";
 
 export class App extends React.Component<any> {
 
     render() {
-        const {error, login, user_type, fetching, data, data_user, succesGetCode, type_of_input } = this.props;
-        const { setUser } = this.props.pageActions;
+        const {error, login, user_type, fetching, data, data_user, succesVerifyCode, type_of_input } = this.props;
         const { fetchGetCode } = this.props.getCode;
+        const { fetchvVerifyCode } = this.props.verifyCode;
 
 
         return(
             <div>
                 <Row>
-                    <Col xs={12}><Header user_type={user_type} succesGetCode={succesGetCode} setUser={setUser} fetchGetCode={fetchGetCode} type_of_input={type_of_input}/></Col>
+                    <Col xs={12}><Header user_type={user_type} succesVerifyCode={succesVerifyCode} fetchGetCode={fetchGetCode} type_of_input={type_of_input} fetchvVerifyCode={fetchvVerifyCode}/></Col>
                 </Row>
                 <Row>
                     <Col xs={3} lg={3} className="row-no-padding"><Sidebar/></Col>
@@ -40,15 +41,15 @@ function mapStateToProps(state: any) {
         fetching: state.fetching,
         data: state.data,
         data_user: state.data_user,
-        succesGetCode: state.succesGetCode,
+        succesVerifyCode: state.succesVerifyCode,
         type_of_input: state.type_of_input
     };
 }
 
 function mapDispatchProps(dispatch: any) {
     return{
-        pageActions: bindActionCreators(pageActions, dispatch),
-        getCode: bindActionCreators(getCode, dispatch)
+        getCode: bindActionCreators(getCode, dispatch),
+        verifyCode: bindActionCreators(verifyCode, dispatch)
     };
 }
 
