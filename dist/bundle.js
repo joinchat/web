@@ -68495,7 +68495,12 @@ class SignUpDialog extends React.Component {
                 this.props.fetchvVerifyCode(this.state.phone, this.state.code);
             }
             else {
-                this.props.fetchUserSignUp(this.state.username, this.state.password);
+                if (this.validatePassword() && this.validateRepeatPassword()) {
+                    console.log("Yep");
+                }
+                else {
+                    console.log("error");
+                }
                 this.setState({ username: "", password: "" });
             }
         };
@@ -68519,6 +68524,36 @@ class SignUpDialog extends React.Component {
                 errorState
             });
             return true;
+        };
+        this.validatePassword = () => {
+            let errorState = Object.assign({}, this.state.errorState);
+            if (this.state.password.length < 1 || this.state.password.length > 32) {
+                errorState.password = "Please input correct password";
+                this.setState({
+                    errorState
+                });
+                return false;
+            }
+            errorState.password = "";
+            this.setState({
+                errorState
+            });
+            return true;
+        };
+        this.validateRepeatPassword = () => {
+            let password = this.state.password;
+            let confirmPassword = this.state.repeatPassword;
+            let compare = password.localeCompare(confirmPassword);
+            let errorState = Object.assign({}, this.state.errorState);
+            if (compare === 0) {
+                errorState.repeatPassword = "";
+                this.setState({
+                    errorState
+                });
+                return true;
+            }
+            errorState.repeatPassword = "Confirm password must be equal with password";
+            return false;
         };
         this.state = {
             open: false,
@@ -68552,9 +68587,9 @@ class SignUpDialog extends React.Component {
             case "userName":
                 inputCollection =
                     React.createElement("div", null,
-                        React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Username", value: username, onChange: this.updateState.bind(this), errorText: error || errorState.username }),
-                        React.createElement(TextField_1.default, { fullWidth: true, type: "password", hintText: "Password Field", floatingLabelText: "password", value: password, onChange: this.updateState.bind(this), errorText: error || errorState.password }),
-                        React.createElement(TextField_1.default, { fullWidth: true, type: "password", hintText: "Password Field", floatingLabelText: "Please repeat password", value: repeatPassword, onChange: this.updateState.bind(this), errorText: error || errorState.repeatPassword }));
+                        React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Username", value: username, name: "username", onChange: this.updateState.bind(this), errorText: error || errorState.username }),
+                        React.createElement(TextField_1.default, { fullWidth: true, type: "password", hintText: "Password Field", floatingLabelText: "password", name: "password", value: password, onChange: this.updateState.bind(this), errorText: error || errorState.password }),
+                        React.createElement(TextField_1.default, { fullWidth: true, type: "password", hintText: "Password Field", floatingLabelText: "Please repeat password", name: "repeatPassword", value: repeatPassword, onChange: this.updateState.bind(this), errorText: error || errorState.repeatPassword }));
                 break;
         }
         const actions = [
@@ -70085,7 +70120,7 @@ function userState(state = initialState, action) {
         case user_1.CODE_RECIEVED_SUCCESS:
             return Object.assign({}, state, { error: "", fetching: false, user_type: "guest", succesGetCode: true, type_of_input: "code" });
         case user_1.CODE_RECIEVED_FAIL:
-            return Object.assign({}, state, { error: "", fetching: false, user_type: "guest", succesGetCode: false });
+            return Object.assign({}, state, { error: "This phone is already used", fetching: false, user_type: "guest", succesGetCode: false });
         case user_1.CODE_VERIFY_SUCCESS:
             return Object.assign({}, state, { error: "", succesVerifyCode: true, type_of_input: "userName" });
         case user_1.CODE_VERIFY_FAIL:

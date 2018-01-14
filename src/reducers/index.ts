@@ -34,7 +34,7 @@ export default function userState(state: any = initialState, action: any) {
 
         case CODE_RECIEVED_FAIL:
             return {...state,
-                error: "",
+                error: "This phone is already used",
                 fetching: false,
                 user_type: "guest",
                 succesGetCode: false,

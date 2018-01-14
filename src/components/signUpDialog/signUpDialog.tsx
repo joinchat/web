@@ -66,7 +66,12 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
     } else if (this.props.type_of_input === "code") {
       this.props.fetchvVerifyCode(this.state.phone, this.state.code);
     } else {
-      this.props.fetchUserSignUp(this.state.username, this.state.password)
+      if (this.validatePassword() && this.validateRepeatPassword()) {
+        console.log("Yep");
+        // this.props.fetchUserSignUp(this.state.username, this.state.password);
+      }  else {
+        console.log("error");
+      }
       this.setState({username: "", password: ""});
     }
   }
@@ -96,6 +101,39 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
     return true;
   }
 
+  validatePassword = () => {
+    let errorState = {...this.state.errorState};
+    if (this.state.password.length < 1 || this.state.password.length > 32) {
+      errorState.password = "Please input correct password";
+      this.setState({
+        errorState
+      });
+      return false;
+    }
+    errorState.password = "";
+      this.setState({
+        errorState
+      });
+    return true;
+  }
+
+  validateRepeatPassword = () => {
+    let password = this.state.password;
+    let confirmPassword = this.state.repeatPassword;
+
+    let compare = password.localeCompare(confirmPassword);
+    let errorState = {...this.state.errorState};
+
+    if (compare === 0) {
+      errorState.repeatPassword = "";
+      this.setState({
+        errorState
+      });
+      return true;
+    }
+      errorState.repeatPassword = "Confirm password must be equal with password";
+      return false;
+  }
 
   render() {
     let inputCollection = null;
@@ -135,6 +173,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
               fullWidth={true}
               floatingLabelText="Username"
               value={username}
+              name="username"
               onChange={this.updateState.bind(this)}
               errorText={error || errorState.username}
             />
@@ -143,6 +182,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
               type="password"
               hintText="Password Field"
               floatingLabelText="password"
+              name="password"
               value={password}
               onChange={this.updateState.bind(this)}
               errorText={error || errorState.password}
@@ -152,6 +192,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
               type="password"
               hintText="Password Field"
               floatingLabelText="Please repeat password"
+              name="repeatPassword"
               value={repeatPassword}
               onChange={this.updateState.bind(this)}
               errorText={error || errorState.repeatPassword}
