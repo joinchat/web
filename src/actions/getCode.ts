@@ -1,6 +1,5 @@
 import { CODE_RECIEVED_SUCCESS, CODE_RECIEVED_FAIL, FETCH_REQUEST, AUTORIZATION_GET_CODE_PATH } from "../utils/constants/user";
 import { configForRequest } from "../utils/types/types";
-// import { GetVerificationCode } from "./request";
 
 export function fetchGetCode(phone: string) {
     return (dispatch: any) => {
@@ -16,14 +15,14 @@ export function fetchGetCode(phone: string) {
 
         return fetch(`${AUTORIZATION_GET_CODE_PATH}` + `${phone}`, config)
             .then((res: any) => {
-            if (res.status === 200 ) {
-                dispatch(fetchGetCodeSuccess());
-            } else {
+                if (res.status === 200 ) {
+                    dispatch(fetchGetCodeSuccess());
+                } else {
+                    dispatch(fetchGetCodeFail());
+                }
+            }).catch(function(error) {
                 dispatch(fetchGetCodeFail());
-            }
-        }).catch(function(error) {
-            console.log(error);
-        });
+            });
     };
 }
 

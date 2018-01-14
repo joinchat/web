@@ -10,6 +10,7 @@ const initialState = {
     data: "",
     data_user: "",
     succesGetCode: false,
+    type_of_input: "phone",
 };
 
 export default function userState(state: any = initialState, action: any) {
@@ -17,8 +18,8 @@ export default function userState(state: any = initialState, action: any) {
         case FETCH_REQUEST:
             return state;
 
-        case SET_USER:
-            return {...state, user_type: action.payload};
+        // case SET_USER:
+        //     return {...state, user_type: action.payload};
 
         case CODE_RECIEVED_SUCCESS:
             return {...state,
@@ -26,6 +27,7 @@ export default function userState(state: any = initialState, action: any) {
                 fetching: false,
                 user_type: "guest",
                 succesGetCode: true,
+                type_of_input: "code"
             };
 
         case CODE_RECIEVED_FAIL:

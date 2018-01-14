@@ -13,16 +13,15 @@ import { bindActionCreators } from "redux";
 export class App extends React.Component<any> {
 
     render() {
-        const {error, login, user_type, fetching, data, data_user, succesGetCode } = this.props;
+        const {error, login, user_type, fetching, data, data_user, succesGetCode, type_of_input } = this.props;
         const { setUser } = this.props.pageActions;
         const { fetchGetCode } = this.props.getCode;
 
-        console.log(this.props);
 
         return(
             <div>
                 <Row>
-                    <Col xs={12}><Header user_type={user_type} succesGetCode={succesGetCode} setUser={setUser} fetchGetCode={fetchGetCode}/></Col>
+                    <Col xs={12}><Header user_type={user_type} succesGetCode={succesGetCode} setUser={setUser} fetchGetCode={fetchGetCode} type_of_input={type_of_input}/></Col>
                 </Row>
                 <Row>
                     <Col xs={3} lg={3} className="row-no-padding"><Sidebar/></Col>
@@ -41,7 +40,8 @@ function mapStateToProps(state: any) {
         fetching: state.fetching,
         data: state.data,
         data_user: state.data_user,
-        succesGetCode: state.succesGetCode
+        succesGetCode: state.succesGetCode,
+        type_of_input: state.type_of_input
     };
 }
 

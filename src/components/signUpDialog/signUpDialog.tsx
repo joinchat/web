@@ -3,7 +3,7 @@ import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
-import { PostVerificationCode, GetVerificationCode } from "../../actions/request";
+import { PostVerificationCode } from "../../actions/request";
 import { fetchGetCode } from "../../actions/getCode";
 
 interface SignUpDialogState {
@@ -13,13 +13,13 @@ interface SignUpDialogState {
   username: string;
   password: string;
   repeatPassword: string;
-  typeOfInput: string;
 }
 
 interface SignUpDialogProps {
   succesGetCode: boolean;
   setUser: any;
   fetchGetCode: any;
+  type_of_input: string;
 }
 
 export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialogState> {
@@ -33,7 +33,6 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
       username: "",
       password: "",
       repeatPassword: "",
-      typeOfInput: "phone",
     };
 
   }
@@ -47,17 +46,16 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
   }
 
   handlePost = () => {
-    if (this.state.typeOfInput === "phone") {
+    if (this.props.type_of_input === "phone") {
       // GetVerificationCode(this.state.phone);
       // fetchGetCode(this.state.phone);
       this.props.fetchGetCode(this.state.phone);
       // this.setState({typeOfInput: "code"}) : null;
       // this.props.setUser("user");
-    } else if (this.state.typeOfInput === "code") {
+    } else if (this.props.type_of_input === "code") {
       PostVerificationCode(this.state.phone, this.state.code);
-      this.setState({code: "", typeOfInput: "userName"});
+      this.setState({code: ""});
     } else {
-
       this.setState({username: "", password: ""});
     }
   }
@@ -98,10 +96,11 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
   }
 
   render() {
-    console.log(this.props);
     let inputCollection = null;
 
-    switch (this.state.typeOfInput) {
+    console.log(this.props.type_of_input);
+
+    switch (this.props.type_of_input) {
       case "phone":
         inputCollection =
           <TextField
