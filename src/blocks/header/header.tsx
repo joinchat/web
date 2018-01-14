@@ -36,7 +36,7 @@ export class Header extends React.Component<HeaderProps> {
         let block = null;
         if (user_type === "guest") {
             block = <div><SignInDialog fetchUserSignIn={fetchUserSignIn}/>/<SignUpDialog succesVerifyCode={succesVerifyCode} fetchGetCode={fetchGetCode} 
-            type_of_input={type_of_input} 
+            type_of_input={type_of_input}
             fetchvVerifyCode={fetchvVerifyCode}
             fetchUserSignUp={fetchUserSignUp}
             /></div>;

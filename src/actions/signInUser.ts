@@ -25,9 +25,11 @@ export function fetchUserSignIn(username: string, password: string) {
                         console.log(data);
                     });
                     dispatch(fetchSignUserInSuccess());
+                    localStorage.setItem("user_type", "user");
                 } else {
                     res.json().then(function(data: any) {
                         console.log(data);
+                        localStorage.setItem("user_type", "guest");
                     });
                     dispatch(fetchSignUserInFail());
                 }

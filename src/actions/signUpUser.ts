@@ -24,11 +24,13 @@ export function fetchUserSignUp(username: string, password: string) {
                     res.json().then(function(data: any) {
                         console.log(data);
                     });
+                    localStorage.setItem("user_type", "user");
                 dispatch(fetchSignUserUpSuccess());
                 } else {
                     res.json().then(function(data: any) {
                         console.log(data);
                     });
+                    localStorage.setItem("user_type", "guest");
                     dispatch(fetchSignUserUpFail());
                 }
             }).catch(function(error) {

@@ -11,16 +11,22 @@ import * as getCode from "../../actions/getCode";
 import * as verifyCode from "../../actions/verifyCode";
 import * as signUpUser from "../../actions/signUpUser";
 import * as signInUser from "../../actions/signInUser";
+import * as checkTypeOfUser from "../../actions/checkTypeOfUser";
 import { bindActionCreators } from "redux";
 
 export class App extends React.Component<any> {
+    componentDidMount() {
+        // localStorage.setItem("user_type", "guest");
+        this.props.checkTypeOfUser.getTypeOfUser();
+    }
 
     render() {
-        const {error, login, user_type, fetching, data, data_user, succesVerifyCode, type_of_input } = this.props;
+        const { error, login, user_type, fetching, data, data_user, succesVerifyCode, type_of_input } = this.props;
         const { fetchGetCode } = this.props.getCode;
         const { fetchvVerifyCode } = this.props.verifyCode;
         const { fetchUserSignUp } = this.props.signUpUser;
         const { fetchUserSignIn } = this.props.signInUser;
+        const { getTypeOfUser } = this.props.checkTypeOfUser;
 
         return(
             <div>
@@ -45,7 +51,8 @@ function mapStateToProps(state: any) {
         data: state.data,
         data_user: state.data_user,
         succesVerifyCode: state.succesVerifyCode,
-        type_of_input: state.type_of_input
+        type_of_input: state.type_of_input,
+        checkTypeOfUser: state.checkTypeOfUser
     };
 }
 
@@ -55,6 +62,7 @@ function mapDispatchProps(dispatch: any) {
         verifyCode: bindActionCreators(verifyCode, dispatch),
         signUpUser: bindActionCreators(signUpUser, dispatch),
         signInUser: bindActionCreators(signInUser, dispatch),
+        checkTypeOfUser: bindActionCreators(checkTypeOfUser, dispatch)
     };
 }
 

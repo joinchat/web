@@ -16,6 +16,9 @@ export const USER_SIGN_UP_FAIL = "USER_SIGN_UP_FAIL";
 export const USER_SIGN_IN_SUCCESS = "USER_SIGN_IN_SUCCESS";
 export const USER_SIGN_IN_FAIL = "USER_SIGN_IN_FAIL";
 
+export const USER_TYPE_USER = "USER_TYPE_USER";
+export const USER_TYPE_GUEST = "USER_TYPE_GUEST";
+
 
 // authorization/get-code?phone=37258147073
 const TEST_URL = "http://api.demo.join.chat/v1";
