@@ -49,7 +49,7 @@ export default function userState(state: any = initialState, action: any) {
 
         case CODE_VERIFY_FAIL:
             return {...state,
-                error: "",
+                error: "This code do not exist",
                 succesVerifyCode: false,
             };
 
