@@ -68499,8 +68499,13 @@ class SignUpDialog extends React.Component {
                 this.setState({ username: "", password: "" });
             }
         };
+        this.updateState = (event) => {
+            const value = event.target.value;
+            const name = event.target.name;
+        };
         this.updatePhone = (event) => {
             const value = event.target.value;
+            console.log(event.target.name);
             this.setState({
                 phone: value,
             });
@@ -68541,15 +68546,14 @@ class SignUpDialog extends React.Component {
     }
     render() {
         let inputCollection = null;
-        console.log(this.props);
         switch (this.props.type_of_input) {
             case "phone":
                 inputCollection =
-                    React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Enter your phone", value: this.state.phone, onChange: this.updatePhone.bind(this), type: "number", errorText: this.props.error || this.state.error });
+                    React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Enter your phone", value: this.state.phone, onChange: this.updatePhone.bind(this), type: "number", errorText: this.props.error || this.state.error, name: "phone" });
                 break;
             case "code":
                 inputCollection =
-                    React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Enter code from message", value: this.state.code, onChange: this.updateCode.bind(this), errorText: this.props.error || this.state.error });
+                    React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Enter code from message", value: this.state.code, onChange: this.updateCode.bind(this), errorText: this.props.error || this.state.error, name: "code" });
                 break;
             case "userName":
                 inputCollection =

@@ -59,8 +59,21 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
     }
   }
 
+  updateState = (event: any) => {
+    const value = event.target.value;
+    const name = event.target.name;
+
+    this.setState((name, value) => {
+       name: value
+    });
+    // this.setState(function(name, value){
+    //   return `${name}`: value
+    // });
+  }
+
   updatePhone = (event: any) => {
     const value = event.target.value;
+    console.log(event.target.name);
     this.setState({
       phone: value,
     });
@@ -97,7 +110,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
   render() {
     let inputCollection = null;
 
-    console.log(this.props);
+    // console.log(this.props);
 
     switch (this.props.type_of_input) {
       case "phone":
@@ -106,9 +119,11 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
             fullWidth={true}
             floatingLabelText="Enter your phone"
             value={this.state.phone}
-            onChange={this.updatePhone.bind(this)}
+            // onChange={this.updatePhone.bind(this)}
+            onChange={this.updateState.bind(this)}
             type="number"
             errorText={this.props.error || this.state.error}
+            name="phone"
           />;
       break;
       case "code":
@@ -119,6 +134,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
             value={this.state.code}
             onChange={this.updateCode.bind(this)}
             errorText={this.props.error || this.state.error}
+            name="code"
           />;
       break;
       case "userName":
