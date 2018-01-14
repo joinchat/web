@@ -68536,6 +68536,7 @@ class SignUpDialog extends React.Component {
             username: "",
             password: "",
             repeatPassword: "",
+            error: ""
         };
     }
     render() {
@@ -68544,16 +68545,16 @@ class SignUpDialog extends React.Component {
         switch (this.props.type_of_input) {
             case "phone":
                 inputCollection =
-                    React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Enter your phone", value: this.state.phone, onChange: this.updatePhone.bind(this), type: "number" });
+                    React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Enter your phone", value: this.state.phone, onChange: this.updatePhone.bind(this), type: "number", errorText: this.props.error || this.state.error });
                 break;
             case "code":
                 inputCollection =
-                    React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Enter code from message", value: this.state.code, onChange: this.updateCode.bind(this) });
+                    React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Enter code from message", value: this.state.code, onChange: this.updateCode.bind(this), errorText: this.props.error || this.state.error });
                 break;
             case "userName":
                 inputCollection =
                     React.createElement("div", null,
-                        React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Username", value: this.state.username, onChange: this.updateName.bind(this) }),
+                        React.createElement(TextField_1.default, { fullWidth: true, floatingLabelText: "Username", value: this.state.username, onChange: this.updateName.bind(this), errorText: this.props.error || this.state.error }),
                         React.createElement(TextField_1.default, { fullWidth: true, type: "password", hintText: "Password Field", floatingLabelText: "password", value: this.state.password, onChange: this.updatePassword.bind(this) }),
                         React.createElement(TextField_1.default, { fullWidth: true, type: "password", hintText: "Password Field", floatingLabelText: "Please repeat password", value: this.state.repeatPassword, onChange: this.updateRepeatPassword.bind(this) }));
                 break;

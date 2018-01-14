@@ -12,6 +12,7 @@ interface SignUpDialogState {
   username: string;
   password: string;
   repeatPassword: string;
+  error: string;
 }
 
 interface SignUpDialogProps {
@@ -34,6 +35,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
       username: "",
       password: "",
       repeatPassword: "",
+      error: ""
     };
 
   }
@@ -106,6 +108,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
             value={this.state.phone}
             onChange={this.updatePhone.bind(this)}
             type="number"
+            errorText={this.props.error || this.state.error}
           />;
       break;
       case "code":
@@ -115,6 +118,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
             floatingLabelText="Enter code from message"
             value={this.state.code}
             onChange={this.updateCode.bind(this)}
+            errorText={this.props.error || this.state.error}
           />;
       break;
       case "userName":
@@ -125,6 +129,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
               floatingLabelText="Username"
               value={this.state.username}
               onChange={this.updateName.bind(this)}
+              errorText={this.props.error || this.state.error}
             />
             <TextField
               fullWidth={true}
