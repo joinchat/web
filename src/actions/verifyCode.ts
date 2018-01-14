@@ -25,9 +25,9 @@ export function fetchvVerifyCode(phone: string, code: string) {
                     });
                     dispatch(fetchVerifyCodeSuccess());
                 } else {
-                    res.json().then(function(data: any) {
-                        console.log(data);
-                    });
+                    // res.json().then(function(res: any) {
+                    //     console.log(data);
+                    // });
                     dispatch(fetchVerifyCodeFail());
                 }
             }).catch(function(error) {

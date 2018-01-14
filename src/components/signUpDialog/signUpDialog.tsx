@@ -45,7 +45,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
         phone: "",
         code: "",
         password: "",
-        repeatPassword:  "",
+        repeatPassword: "",
         username:  ""
       }
     };
@@ -67,12 +67,12 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
       this.props.fetchvVerifyCode(this.state.phone, this.state.code);
     } else {
       if (this.validatePassword() && this.validateRepeatPassword()) {
-        console.log("Yep");
-        // this.props.fetchUserSignUp(this.state.username, this.state.password);
+        // console.log("Yep");
+        this.props.fetchUserSignUp(this.state.username, this.state.password);
       }  else {
-        console.log("error");
+        console.log(this.state.errorState.repeatPassword);
+        console.log(this.state.errorState.password);
       }
-      this.setState({username: "", password: ""});
     }
   }
 
@@ -109,30 +109,35 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
         errorState
       });
       return false;
-    }
-    errorState.password = "";
+    } else {
+      errorState.password = "";
       this.setState({
         errorState
       });
-    return true;
+      return true;
+    }
   }
 
   validateRepeatPassword = () => {
     let password = this.state.password;
     let confirmPassword = this.state.repeatPassword;
 
-    let compare = password.localeCompare(confirmPassword);
+    let compare: number = password.localeCompare(confirmPassword);
     let errorState = {...this.state.errorState};
 
-    if (compare === 0) {
+    if (compare !== 0) {
+      errorState.repeatPassword = "Confirm password must be equal with password";
+      this.setState({
+        errorState
+      });
+      return false;
+    } else {
       errorState.repeatPassword = "";
       this.setState({
         errorState
       });
       return true;
     }
-      errorState.repeatPassword = "Confirm password must be equal with password";
-      return false;
   }
 
   render() {
@@ -162,7 +167,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
             floatingLabelText="Enter code from message"
             value={code}
             onChange={this.updateState.bind(this)}
-            errorText={error || errorState.code}
+            errorText={ error || errorState.code }
             name="code"
           />;
       break;

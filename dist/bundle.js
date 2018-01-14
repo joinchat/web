@@ -68496,12 +68496,12 @@ class SignUpDialog extends React.Component {
             }
             else {
                 if (this.validatePassword() && this.validateRepeatPassword()) {
-                    console.log("Yep");
+                    this.props.fetchUserSignUp(this.state.username, this.state.password);
                 }
                 else {
-                    console.log("error");
+                    console.log(this.state.errorState.repeatPassword);
+                    console.log(this.state.errorState.password);
                 }
-                this.setState({ username: "", password: "" });
             }
         };
         this.updateState = (event) => {
@@ -68534,26 +68534,33 @@ class SignUpDialog extends React.Component {
                 });
                 return false;
             }
-            errorState.password = "";
-            this.setState({
-                errorState
-            });
-            return true;
+            else {
+                errorState.password = "";
+                this.setState({
+                    errorState
+                });
+                return true;
+            }
         };
         this.validateRepeatPassword = () => {
             let password = this.state.password;
             let confirmPassword = this.state.repeatPassword;
             let compare = password.localeCompare(confirmPassword);
             let errorState = Object.assign({}, this.state.errorState);
-            if (compare === 0) {
+            if (compare !== 0) {
+                errorState.repeatPassword = "Confirm password must be equal with password";
+                this.setState({
+                    errorState
+                });
+                return false;
+            }
+            else {
                 errorState.repeatPassword = "";
                 this.setState({
                     errorState
                 });
                 return true;
             }
-            errorState.repeatPassword = "Confirm password must be equal with password";
-            return false;
         };
         this.state = {
             open: false,
@@ -69893,9 +69900,6 @@ function fetchvVerifyCode(phone, code) {
                 dispatch(fetchVerifyCodeSuccess());
             }
             else {
-                res.json().then(function (data) {
-                    console.log(data);
-                });
                 dispatch(fetchVerifyCodeFail());
             }
         }).catch(function (error) {
@@ -69946,17 +69950,11 @@ function fetchUserSignUp(username, password) {
         let guid = localStorage.getItem("guid");
         return fetch(`${user_1.SIGNUP_PATH}` + `${guid}`, config)
             .then((res) => {
-            if (res.status === 200) {
-                res.json().then(function (data) {
-                    console.log(data);
-                });
+            if (res.status === 201) {
                 localStorage.setItem("user_type", "user");
                 dispatch(fetchSignUserUpSuccess());
             }
             else {
-                res.json().then(function (data) {
-                    console.log(data);
-                });
                 localStorage.setItem("user_type", "guest");
                 dispatch(fetchSignUserUpFail());
             }
@@ -70124,7 +70122,7 @@ function userState(state = initialState, action) {
         case user_1.CODE_VERIFY_SUCCESS:
             return Object.assign({}, state, { error: "", succesVerifyCode: true, type_of_input: "userName" });
         case user_1.CODE_VERIFY_FAIL:
-            return Object.assign({}, state, { error: "", succesVerifyCode: false });
+            return Object.assign({}, state, { error: "This code do not exist", succesVerifyCode: false });
         case user_1.USER_SIGN_UP_SUCCESS:
             return Object.assign({}, state, { login: true, user_type: "user" });
         case user_1.USER_SIGN_UP_FAIL:

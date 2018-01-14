@@ -20,16 +20,16 @@ export function fetchUserSignUp(username: string, password: string) {
 
         return fetch(`${SIGNUP_PATH}` + `${guid}`, config)
             .then((res: any) => {
-                if (res.status === 200 ) {
-                    res.json().then(function(data: any) {
-                        console.log(data);
-                    });
+                if (res.status === 201 ) {
+                    // res.json().then(function(data: any) {
+                    //     console.log(data);
+                    // });
                     localStorage.setItem("user_type", "user");
                 dispatch(fetchSignUserUpSuccess());
                 } else {
-                    res.json().then(function(data: any) {
-                        console.log(data);
-                    });
+                    // res.json().then(function(data: any) {
+                    //     console.log(data);
+                    // });
                     localStorage.setItem("user_type", "guest");
                     dispatch(fetchSignUserUpFail());
                 }
