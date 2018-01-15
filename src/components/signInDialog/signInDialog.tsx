@@ -13,6 +13,7 @@ interface SignInDialogState {
 interface SignInDialogProps {
   succesVerifyCode?: boolean;
   fetchUserSignIn: any;
+  error: string;
 }
 
 export class SignInDialog extends React.Component<SignInDialogProps, SignInDialogState> {
@@ -57,6 +58,9 @@ export class SignInDialog extends React.Component<SignInDialogProps, SignInDialo
 
 
   render() {
+
+    let { error } = this.props;
+
     const actions = [
       <FlatButton
         label="Cancel"
@@ -89,14 +93,16 @@ export class SignInDialog extends React.Component<SignInDialogProps, SignInDialo
             floatingLabelText="Enter your username"
             value={this.state.username}
             onChange={this.updateName.bind(this)}
-          />;
+            errorText={ error }
+          />
           <TextField
             fullWidth={true}
             floatingLabelText="Enter your password"
             value={this.state.password}
             onChange={this.updatePassword.bind(this)}
             type="password"
-          />;
+            errorText={ error }
+          />
         </Dialog>
       </div>
     );

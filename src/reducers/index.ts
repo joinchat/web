@@ -75,6 +75,7 @@ export default function userState(state: any = initialState, action: any) {
             return {...state,
                 login: false,
                 user_type: "guest",
+                error: "Please check username or password"
         };
         
         // case LOGING_OUT:

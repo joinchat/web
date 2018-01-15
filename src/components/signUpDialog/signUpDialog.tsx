@@ -158,7 +158,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
             type="number"
             name="phone"
             errorText={error || errorState.phone}
-          />;
+          />
       break;
       case "code":
         inputCollection =
@@ -169,7 +169,7 @@ export class SignUpDialog extends React.Component<SignUpDialogProps, SignUpDialo
             onChange={this.updateState.bind(this)}
             errorText={ error || errorState.code }
             name="code"
-          />;
+          />
       break;
       case "userName":
         inputCollection =

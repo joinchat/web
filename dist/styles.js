@@ -345,28 +345,32 @@ module.exports = __webpack_require__(118);
 /* global __resourceQuery WorkerGlobalScope self */
 /* eslint prefer-destructuring: off */
 
-const url = __webpack_require__(78);
-const stripAnsi = __webpack_require__(84);
-const log = __webpack_require__(86).getLogger('webpack-dev-server');
-const socket = __webpack_require__(87);
-const overlay = __webpack_require__(89);
+var url = __webpack_require__(78);
+var stripAnsi = __webpack_require__(84);
+var log = __webpack_require__(86).getLogger('webpack-dev-server');
+var socket = __webpack_require__(87);
+var overlay = __webpack_require__(89);
 
 function getCurrentScriptSource() {
   // `document.currentScript` is the most accurate way to find the current script,
   // but is not supported in all browsers.
-  if (document.currentScript) { return document.currentScript.getAttribute('src'); }
+  if (document.currentScript) {
+    return document.currentScript.getAttribute('src');
+  }
   // Fall back to getting all scripts in the document.
-  const scriptElements = document.scripts || [];
-  const currentScript = scriptElements[scriptElements.length - 1];
-  if (currentScript) { return currentScript.getAttribute('src'); }
+  var scriptElements = document.scripts || [];
+  var currentScript = scriptElements[scriptElements.length - 1];
+  if (currentScript) {
+    return currentScript.getAttribute('src');
+  }
   // Fail as there was no script to use.
   throw new Error('[WDS] Failed to get current script source.');
 }
 
-let urlParts;
-let hotReload = true;
+var urlParts = void 0;
+var hotReload = true;
 if (typeof window !== 'undefined') {
-  const qs = window.location.search.toLowerCase();
+  var qs = window.location.search.toLowerCase();
   hotReload = qs.indexOf('hotreload=false') === -1;
 }
 if (true) {
@@ -374,38 +378,34 @@ if (true) {
   urlParts = url.parse(__resourceQuery.substr(1));
 } else {
   // Else, get the url from the <script> this file was called with.
-  let scriptHost = getCurrentScriptSource();
+  var scriptHost = getCurrentScriptSource();
   // eslint-disable-next-line no-useless-escape
   scriptHost = scriptHost.replace(/\/[^\/]+$/, '');
-  urlParts = url.parse((scriptHost || '/'), false, true);
+  urlParts = url.parse(scriptHost || '/', false, true);
 }
 
 if (!urlParts.port || urlParts.port === '0') {
   urlParts.port = self.location.port;
 }
 
-let hot = false;
-let initial = true;
-let currentHash = '';
-let useWarningOverlay = false;
-let useErrorOverlay = false;
-let useProgress = false;
+var _hot = false;
+var initial = true;
+var currentHash = '';
+var useWarningOverlay = false;
+var useErrorOverlay = false;
+var useProgress = false;
 
-const INFO = 'info';
-const WARNING = 'warning';
-const ERROR = 'error';
-const NONE = 'none';
+var INFO = 'info';
+var WARNING = 'warning';
+var ERROR = 'error';
+var NONE = 'none';
 
 // Set the default log level
 log.setDefaultLevel(INFO);
 
 // Send messages to the outside, so plugins can consume it.
 function sendMsg(type, data) {
-  if (
-    typeof self !== 'undefined' &&
-  (typeof WorkerGlobalScope === 'undefined' ||
-  !(self instanceof WorkerGlobalScope))
-  ) {
+  if (typeof self !== 'undefined' && (typeof WorkerGlobalScope === 'undefined' || !(self instanceof WorkerGlobalScope))) {
     self.postMessage({
       type: 'webpack' + type,
       data: data
@@ -413,27 +413,28 @@ function sendMsg(type, data) {
   }
 }
 
-const onSocketMsg = {
-  hot: function msgHot() {
-    hot = true;
+var onSocketMsg = {
+  hot: function hot() {
+    _hot = true;
     log.info('[WDS] Hot Module Replacement enabled.');
   },
-  invalid: function msgInvalid() {
+  invalid: function invalid() {
     log.info('[WDS] App updated. Recompiling...');
     // fixes #1042. overlay doesn't clear if errors are fixed but warnings remain.
     if (useWarningOverlay || useErrorOverlay) overlay.clear();
     sendMsg('Invalid');
   },
-  hash: function msgHash(hash) {
-    currentHash = hash;
+  hash: function hash(_hash) {
+    currentHash = _hash;
   },
+
   'still-ok': function stillOk() {
     log.info('[WDS] Nothing changed.');
     if (useWarningOverlay || useErrorOverlay) overlay.clear();
     sendMsg('StillOk');
   },
   'log-level': function logLevel(level) {
-    const hotCtx = __webpack_require__(94);
+    var hotCtx = __webpack_require__(94);
     if (hotCtx.keys().indexOf('./log') !== -1) {
       hotCtx('./log').setLogLevel(level);
     }
@@ -453,9 +454,9 @@ const onSocketMsg = {
         log.error('[WDS] Unknown clientLogLevel \'' + level + '\'');
     }
   },
-  overlay: function msgOverlay(value) {
+  overlay: function overlay(value) {
     if (typeof document !== 'undefined') {
-      if (typeof (value) === 'boolean') {
+      if (typeof value === 'boolean') {
         useWarningOverlay = false;
         useErrorOverlay = value;
       } else if (value) {
@@ -464,53 +465,62 @@ const onSocketMsg = {
       }
     }
   },
-  progress: function msgProgress(progress) {
+  progress: function progress(_progress) {
     if (typeof document !== 'undefined') {
-      useProgress = progress;
+      useProgress = _progress;
     }
   },
+
   'progress-update': function progressUpdate(data) {
     if (useProgress) log.info('[WDS] ' + data.percent + '% - ' + data.msg + '.');
   },
-  ok: function msgOk() {
+  ok: function ok() {
     sendMsg('Ok');
     if (useWarningOverlay || useErrorOverlay) overlay.clear();
     if (initial) return initial = false; // eslint-disable-line no-return-assign
     reloadApp();
   },
+
   'content-changed': function contentChanged() {
     log.info('[WDS] Content base changed. Reloading...');
     self.location.reload();
   },
-  warnings: function msgWarnings(warnings) {
+  warnings: function warnings(_warnings) {
     log.warn('[WDS] Warnings while compiling.');
-    const strippedWarnings = warnings.map(function map(warning) { return stripAnsi(warning); });
+    var strippedWarnings = _warnings.map(function (warning) {
+      return stripAnsi(warning);
+    });
     sendMsg('Warnings', strippedWarnings);
-    for (let i = 0; i < strippedWarnings.length; i++) { log.warn(strippedWarnings[i]); }
-    if (useWarningOverlay) overlay.showMessage(warnings);
+    for (var i = 0; i < strippedWarnings.length; i++) {
+      log.warn(strippedWarnings[i]);
+    }
+    if (useWarningOverlay) overlay.showMessage(_warnings);
 
     if (initial) return initial = false; // eslint-disable-line no-return-assign
     reloadApp();
   },
-  errors: function msgErrors(errors) {
+  errors: function errors(_errors) {
     log.error('[WDS] Errors while compiling. Reload prevented.');
-    const strippedErrors = errors.map(function map(error) { return stripAnsi(error); });
+    var strippedErrors = _errors.map(function (error) {
+      return stripAnsi(error);
+    });
     sendMsg('Errors', strippedErrors);
-    for (let i = 0; i < strippedErrors.length; i++) { log.error(strippedErrors[i]); }
-    if (useErrorOverlay) overlay.showMessage(errors);
+    for (var i = 0; i < strippedErrors.length; i++) {
+      log.error(strippedErrors[i]);
+    }
+    if (useErrorOverlay) overlay.showMessage(_errors);
   },
-  error: function msgError(error) {
-    log.error(error);
+  error: function error(_error) {
+    log.error(_error);
   },
-  close: function msgClose() {
+  close: function close() {
     log.error('[WDS] Disconnected!');
     sendMsg('Close');
   }
 };
 
-let hostname = urlParts.hostname;
-let protocol = urlParts.protocol;
-
+var hostname = urlParts.hostname;
+var protocol = urlParts.protocol;
 
 // check ipv4 and ipv6 `all hostname`
 if (hostname === '0.0.0.0' || hostname === '::') {
@@ -531,7 +541,7 @@ if (hostname && (self.location.protocol === 'https:' || urlParts.hostname === '0
   protocol = self.location.protocol;
 }
 
-const socketUrl = url.format({
+var socketUrl = url.format({
   protocol: protocol,
   auth: urlParts.auth,
   hostname: hostname,
@@ -541,8 +551,8 @@ const socketUrl = url.format({
 
 socket(socketUrl, onSocketMsg);
 
-let isUnloading = false;
-self.addEventListener('beforeunload', function beforeUnload() {
+var isUnloading = false;
+self.addEventListener('beforeunload', function () {
   isUnloading = true;
 });
 
@@ -550,19 +560,19 @@ function reloadApp() {
   if (isUnloading || !hotReload) {
     return;
   }
-  if (hot) {
+  if (_hot) {
     log.info('[WDS] App hot update...');
     // eslint-disable-next-line global-require
-    const hotEmitter = __webpack_require__(96);
+    var hotEmitter = __webpack_require__(96);
     hotEmitter.emit('webpackHotUpdate', currentHash);
     if (typeof self !== 'undefined' && self.window) {
       // broadcast update to window
       self.postMessage('webpackHotUpdate' + currentHash, '*');
     }
   } else {
-    let rootWindow = self;
+    var rootWindow = self;
     // use parent window for reload (in case we're in an iframe with no valid src)
-    const intervalId = self.setInterval(function findRootWindow() {
+    var intervalId = self.setInterval(function () {
       if (rootWindow.location.protocol !== 'about:') {
         // reload immediately if protocol is valid
         applyReload(rootWindow, intervalId);
@@ -582,7 +592,6 @@ function reloadApp() {
     rootWindow.location.reload();
   }
 }
-
 /* WEBPACK VAR INJECTION */}.call(exports, "?http://localhost:8080"))
 
 /***/ }),
@@ -2093,11 +2102,9 @@ var objectKeys = Object.keys || function (obj) {
 
 "use strict";
 
-var ansiRegex = __webpack_require__(85)();
+const ansiRegex = __webpack_require__(85);
 
-module.exports = function (str) {
-	return typeof str === 'string' ? str.replace(ansiRegex, '') : str;
-};
+module.exports = input => typeof input === 'string' ? input.replace(ansiRegex(), '') : input;
 
 
 /***/ }),
@@ -2107,8 +2114,14 @@ module.exports = function (str) {
 
 "use strict";
 
-module.exports = function () {
-	return /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-PRZcf-nqry=><]/g;
+
+module.exports = () => {
+	const pattern = [
+		'[\\u001B\\u009B][[\\]()#;?]*(?:(?:(?:[a-zA-Z\\d]*(?:;[a-zA-Z\\d]*)*)?\\u0007)',
+		'(?:(?:\\d{1,4}(?:;\\d{0,4})*)?[\\dA-PRZcf-ntqry=><~]))'
+	].join('|');
+
+	return new RegExp(pattern, 'g');
 };
 
 
@@ -2381,12 +2394,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
 "use strict";
 
 
-const SockJS = __webpack_require__(88);
+var SockJS = __webpack_require__(88);
 
-let retries = 0;
-let sock = null;
+var retries = 0;
+var sock = null;
 
-function socket(url, handlers) {
+var socket = function initSocket(url, handlers) {
   sock = new SockJS(url);
 
   sock.onopen = function onopen() {
@@ -2394,7 +2407,9 @@ function socket(url, handlers) {
   };
 
   sock.onclose = function onclose() {
-    if (retries === 0) { handlers.close(); }
+    if (retries === 0) {
+      handlers.close();
+    }
 
     // Try to reconnect.
     sock = null;
@@ -2404,10 +2419,10 @@ function socket(url, handlers) {
       // Exponentially increase timeout to reconnect.
       // Respectfully copied from the package `got`.
       // eslint-disable-next-line no-mixed-operators, no-restricted-properties
-      const retryInMs = 1000 * Math.pow(2, retries) + Math.random() * 100;
+      var retryInMs = 1000 * Math.pow(2, retries) + Math.random() * 100;
       retries += 1;
 
-      setTimeout(function cb() {
+      setTimeout(function () {
         socket(url, handlers);
       }, retryInMs);
     }
@@ -2415,13 +2430,14 @@ function socket(url, handlers) {
 
   sock.onmessage = function onmessage(e) {
     // This assumes that all data sent via the websocket is JSON.
-    const msg = JSON.parse(e.data);
-    if (handlers[msg.type]) { handlers[msg.type](msg.data); }
+    var msg = JSON.parse(e.data);
+    if (handlers[msg.type]) {
+      handlers[msg.type](msg.data);
+    }
   };
-}
+};
 
 module.exports = socket;
-
 
 /***/ }),
 
@@ -8174,12 +8190,12 @@ module.exports = function lolcation(loc) {
 // The error overlay is inspired (and mostly copied) from Create React App (https://github.com/facebookincubator/create-react-app)
 // They, in turn, got inspired by webpack-hot-middleware (https://github.com/glenjamin/webpack-hot-middleware).
 
-const ansiHTML = __webpack_require__(90);
-const Entities = __webpack_require__(91).AllHtmlEntities;
+var ansiHTML = __webpack_require__(90);
+var Entities = __webpack_require__(91).AllHtmlEntities;
 
-const entities = new Entities();
+var entities = new Entities();
 
-const colors = {
+var colors = {
   reset: ['transparent', 'transparent'],
   black: '181818',
   red: 'E36049',
@@ -8194,7 +8210,7 @@ const colors = {
 ansiHTML.setColors(colors);
 
 function createOverlayIframe(onIframeLoad) {
-  const iframe = document.createElement('iframe');
+  var iframe = document.createElement('iframe');
   iframe.id = 'webpack-dev-server-client-overlay';
   iframe.src = 'about:blank';
   iframe.style.position = 'fixed';
@@ -8211,7 +8227,7 @@ function createOverlayIframe(onIframeLoad) {
 }
 
 function addOverlayDivTo(iframe) {
-  const div = iframe.contentDocument.createElement('div');
+  var div = iframe.contentDocument.createElement('div');
   div.id = 'webpack-dev-server-client-overlay-div';
   div.style.position = 'fixed';
   div.style.boxSizing = 'border-box';
@@ -8233,9 +8249,9 @@ function addOverlayDivTo(iframe) {
   return div;
 }
 
-let overlayIframe = null;
-let overlayDiv = null;
-let lastOnOverlayDivReady = null;
+var overlayIframe = null;
+var overlayDiv = null;
+var lastOnOverlayDivReady = null;
 
 function ensureOverlayDivExists(onOverlayDivReady) {
   if (overlayDiv) {
@@ -8254,7 +8270,7 @@ function ensureOverlayDivExists(onOverlayDivReady) {
   }
 
   // Create iframe and, when it is ready, a div inside it.
-  overlayIframe = createOverlayIframe(function cb() {
+  overlayIframe = createOverlayIframe(function () {
     overlayDiv = addOverlayDivTo(overlayIframe);
     // Now we can talk!
     lastOnOverlayDivReady(overlayDiv);
@@ -8267,11 +8283,9 @@ function ensureOverlayDivExists(onOverlayDivReady) {
 }
 
 function showMessageOverlay(message) {
-  ensureOverlayDivExists(function cb(div) {
+  ensureOverlayDivExists(function (div) {
     // Make it look similar to our terminal.
-    div.innerHTML = '<span style="color: #' + colors.red +
-                    '">Failed to compile.</span><br><br>' +
-                    ansiHTML(entities.encode(message));
+    div.innerHTML = '<span style="color: #' + colors.red + '">Failed to compile.</span><br><br>' + ansiHTML(entities.encode(message));
   });
 }
 
@@ -8297,7 +8311,6 @@ exports.clear = function handleSuccess() {
 exports.showMessage = function handleMessage(messages) {
   showMessageOverlay(messages[0]);
 };
-
 
 /***/ }),
 

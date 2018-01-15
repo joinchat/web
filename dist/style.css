@@ -461,6 +461,17 @@ ul {
   padding-left: 0 !important;
   padding-right: 0 !important; }
 
+.row {
+  margin-left: 0;
+  margin-right: 0; }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0; }
+
 .loader {
   display: inline-block;
   margin: 0;

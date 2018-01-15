@@ -21,16 +21,9 @@ export function fetchUserSignIn(username: string, password: string) {
         return fetch(`${SIGNIN_PATH}`, config)
             .then((res: any) => {
                 if (res.status === 200 ) {
-                    // res.json().then(function(data: any) {
-                    //     console.log(data);
-                    // });
                     localStorage.setItem("user_type", "user");
                     dispatch(fetchSignUserInSuccess());
                 } else {
-                    // res.json().then(function(data: any) {
-                    //     console.log(data);
-                        
-                    // });
                     localStorage.setItem("user_type", "guest");
                     dispatch(fetchSignUserInFail());
                 }

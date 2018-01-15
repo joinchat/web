@@ -32,7 +32,7 @@ export class App extends React.Component<any> {
         return(
             <div>
                 <Row>
-                    <Col xs={12}><Header
+                    <Col xs={12} className="row-no-padding"><Header
                     user_type={user_type}
                     succesVerifyCode={succesVerifyCode}
                     fetchGetCode={fetchGetCode}
