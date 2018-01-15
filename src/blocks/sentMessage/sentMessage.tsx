@@ -11,7 +11,7 @@ const StyledMessageBlock = styled.div`
     position: absolute;
     clear:both;
     height: 50px;
-    bottom: 42px;
+    bottom: 58px;
     border: 1px solid grey;
     width: 100%;
     display: flex;

@@ -5,6 +5,7 @@ import SentMessage from "../sentMessage/sentMessage";
 
 interface ChannelBodyProps {
     channelsNumbers?: number;
+    user_type: string;
 }
 
 const StyledMain = styled.div`
@@ -23,11 +24,18 @@ export class ChannelBody extends React.Component<ChannelBodyProps> {
     }
 
     render() {
-        return(
-            <div>
+        const { user_type } = this.props;
+        let sendMessageBlock = null;
+
+        if (user_type === "user") {
+            sendMessageBlock =
                 <StyledMain>
                     <SentMessage></SentMessage>
-                </StyledMain>         
+                </StyledMain>
+        }
+        return(
+            <div>
+                {sendMessageBlock}
             </div>
         );
     }
