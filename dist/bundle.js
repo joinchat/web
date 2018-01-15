@@ -47685,8 +47685,8 @@ exports.default = new Typography();
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var app_1 = __webpack_require__(309);
-exports.default = app_1.default;
+var App_1 = __webpack_require__(309);
+exports.default = App_1.default;
 
 
 /***/ }),
