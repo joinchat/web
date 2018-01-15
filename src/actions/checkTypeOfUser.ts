@@ -3,7 +3,7 @@ import { USER_TYPE_GUEST, USER_TYPE_USER, USER_SIGN_UP_FAIL, USER_SIGN_UP_SUCCES
 export function getTypeOfUser() {
     return (dispatch: any) => {
         let user_type = localStorage.getItem("user_type");
-        return ( user_type === "guest" || user_type === null || user_type === undefined )  ? dispatch(userTypeisGuest()) : dispatch(userTypeisUser());
+        return ( user_type !== "user" || user_type === null || user_type === undefined )  ? dispatch(userTypeisGuest()) : dispatch(userTypeisUser());
     };
 };
 

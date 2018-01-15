@@ -70068,7 +70068,7 @@ const user_1 = __webpack_require__(34);
 function getTypeOfUser() {
     return (dispatch) => {
         let user_type = localStorage.getItem("user_type");
-        return (user_type === "guest" || user_type === null || user_type === undefined) ? dispatch(userTypeisGuest()) : dispatch(userTypeisUser());
+        return (user_type !== "user" || user_type === null || user_type === undefined) ? dispatch(userTypeisGuest()) : dispatch(userTypeisUser());
     };
 }
 exports.getTypeOfUser = getTypeOfUser;
