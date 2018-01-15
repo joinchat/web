@@ -1,1 +1,1 @@
-export { default } from "./SettingsPopOver";
+export { default } from "./settingsPopOver";
