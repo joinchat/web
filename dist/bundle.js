@@ -60302,8 +60302,8 @@ exports.default = Header;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var SettingsPopOver_1 = __webpack_require__(419);
-exports.default = SettingsPopOver_1.default;
+var settingsPopOver_1 = __webpack_require__(419);
+exports.default = settingsPopOver_1.default;
 
 
 /***/ }),
