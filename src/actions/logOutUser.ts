@@ -2,7 +2,7 @@ import { USER_SIGN_UP_FAIL } from "../utils/constants/user";
 
 export function logOutUser() {
     return (dispatch: any) => {
-        localStorage.setItem("user_type", "user");
+        localStorage.setItem("user_type", "guest");
         return dispatch(userTypeisGuest());
     };
 };

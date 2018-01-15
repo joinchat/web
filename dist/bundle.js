@@ -70083,7 +70083,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const user_1 = __webpack_require__(34);
 function logOutUser() {
     return (dispatch) => {
-        localStorage.setItem("user_type", "user");
+        localStorage.setItem("user_type", "guest");
         return dispatch(userTypeisGuest());
     };
 }
