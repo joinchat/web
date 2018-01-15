@@ -61,7 +61,7 @@ var styles =
 /******/ 	__webpack_require__.p = "./dist";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 503);
+/******/ 	return __webpack_require__(__webpack_require__.s = 504);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -327,7 +327,7 @@ module.exports = Html5Entities;
 
 /***/ }),
 
-/***/ 503:
+/***/ 504:
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(77);
