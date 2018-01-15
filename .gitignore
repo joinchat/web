@@ -1,2 +1,9 @@
 node_modules
 build
+package-lock.json
+dist/bundle.js
+dist/bundle.js.map
+dist/style.css
+dist/style.css.map
+dist/styles.js
+dist/styles.js.map

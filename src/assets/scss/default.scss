@@ -22,18 +22,33 @@ ul{
     padding-right: 0 !important;
 }
 
+.row{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
+#root{
+  min-height: 100%;
+  max-height: 100vh;
+  overflow: hidden;
+  border-bottom: 1px solid #000;
+}
+
 button{
   border: none;
   background-color: inherit;
   cursor: pointer;
 }
 
-#root{
-  height: 100%;
-  min-height: 100%;
-  overflow-y: hidden;
-}
-
 form,input{
   width: 100%;
+
 }
